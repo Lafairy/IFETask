@@ -26,67 +26,81 @@
 <body>
 
 <div id="pic-1">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
 </div>
 
 <div id="pic-2">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_2.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
 </div>
 
 <div id="pic-3">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_2.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_3.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
 </div>
 
 <div id="pic-4">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_2.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_3.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_4.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
 </div>
 
 <div id="pic-5">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_2.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_3.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_4.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_5.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
+    <img src="./img/5.jpg" alt="Rella">
 </div>
 
-<input type="button" id="p5-pop" value="弹出第一张图片" style="margin-bottom: 60px">
+<input type="button" id="p5-pop" value="弹出第一张图片" style="margin-bottom: 60px
+">
 
 <div id="pic-6">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_1.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_2.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_3.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_4.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_5.jpg" alt="Image Alt">
-    <img src="http://heyjax.github.io/demo/stage_3/task_43/img/img_6.jpg" alt="Image Alt">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
+    <img src="./img/5.jpg" alt="Rella">
+    <img src="./img/6.jpg" alt="Rella">
+</div>
+
+<div id="copyright" style="
+    color: rgb(195, 147, 147);
+    margin-top: 80px;
+    display: block;
+">
+    图片来自Rella大大，
+    <a href="http://www.pixiv.net/member.php?id=163536" style="
+        color: rgb(195, 147, 147);
+    ">
+        P站地址
+    </a>
 </div>
 
 <script>
     var p1 = yoPhoto({
-        wrap: document.getElementById('pic-1')
+        wrap: '#pic-1'
     });
     var p2 = yoPhoto({
-        wrap: document.getElementById('pic-2'),
+        wrap: '#pic-2',
         height: '400px'
     });
 
     var p3 = yoPhoto({
-        wrap: document.getElementById('pic-3'),
+        wrap: '#pic-3',
         height: '400px'
     });
 
     var p4 = yoPhoto({
-        wrap: document.getElementById('pic-4'),
+        wrap: '#pic-4',
         height: '400px'
     });
 
     var p5 = yoPhoto({
-        wrap: document.getElementById('pic-5'),
+        wrap: '#pic-5',
         height: '600px'
     });
 
@@ -95,7 +109,7 @@
     });
 
     var p6 = yoPhoto({
-        wrap: document.getElementById('pic-6'),
+        wrap: '#pic-6',
         height: '600px'
     });
 </script>

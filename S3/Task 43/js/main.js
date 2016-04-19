@@ -18,7 +18,7 @@
 
             var self = this;
 
-            this.wrap = param.wrap;
+            this.wrap = document.querySelector(param.wrap);
             this.imgList = this.wrap.querySelectorAll('img');
 
             this.wrap.className += ' yoPhoto';
@@ -34,11 +34,10 @@
             }
             this.imgPop.addEventListener('click', function(event) {
                 event = event || window.event;
-                console.log(event.target.id);
                 if(event.target.id === 'yoPhoto-pop') {
                     self.imgPop.className = self.imgPop.className.replace('show', '');
                 }
-            })
+            });
 
             this.layout(this.imgList.length);
 
