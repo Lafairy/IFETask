@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box; }
+
+.wowPhoto {
+  position: relative; }
+  .wowPhoto .item {
+    position: absolute; }
+    .wowPhoto .item img {
+      width: 100%;
+      height: auto; }
+
+.wowPhoto.col-2 .item {
+  width: 50%; }
+
+.wowPhoto.col-3 .item {
+  width: 33.33333%; }
+
+.wowPhoto.col-4 .item {
+  width: 25%; }
+
+.wowPhoto.col-5 .item {
+  width: 20%; }
+
+.wowPhoto.col-6 .item {
+  width: 16.66667%; }
+
+.wowPhoto.col-7 .item {
+  width: 14.28571%; }
+
+.wowPhoto.col-8 .item {
+  width: 12.5%; }
+
+.wowPhoto.col-9 .item {
+  width: 11.11111%; }
+
+.wowPhoto.col-10 .item {
+  width: 10%; }
+
+.wowPhoto.col-11 .item {
+  width: 9.09091%; }
+
+/*# sourceMappingURL=style.css.map */

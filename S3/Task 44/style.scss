@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+.wowPhoto {
+
+    position: relative;
+
+    .item {
+
+        position: absolute;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+
+
+}
+
+@for $i from 2 to 12 {
+    .wowPhoto.col-#{$i} .item {
+        width: (100% / $i);
+    }
+}
