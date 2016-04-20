@@ -2,41 +2,92 @@
   box-sizing: border-box; }
 
 .wowPhoto {
-  position: relative; }
-  .wowPhoto .item {
-    position: absolute; }
-    .wowPhoto .item img {
-      width: 100%;
-      height: auto; }
+  position: relative;
+  overflow: hidden; }
+  .wowPhoto .cover {
+    position: relative; }
+    .wowPhoto .cover:before {
+      content: '';
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      background-color: #1D9027;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+      z-index: -1; }
+  .wowPhoto .item img {
+    width: 100% !important;
+    height: auto !important;
+    cursor: zoom-in; }
 
-.wowPhoto.col-2 .item {
+@keyframes loading {
+  0% {
+    border-radius: 0;
+    background-color: #ccc;
+    transform: rotate(0deg); }
+  50% {
+    border-radius: 50%;
+    background-color: #4eba56;
+    transform: rotate(180deg); }
+  100% {
+    border-radius: 1%;
+    background-color: #ccc;
+    transform: rotate(359deg); } }
+.wowPhoto > .col-item {
+  float: left; }
+
+.wowPhoto.col-2 > .col-item {
   width: 50%; }
 
-.wowPhoto.col-3 .item {
+.wowPhoto.col-3 > .col-item {
   width: 33.33333%; }
 
-.wowPhoto.col-4 .item {
+.wowPhoto.col-4 > .col-item {
   width: 25%; }
 
-.wowPhoto.col-5 .item {
+.wowPhoto.col-5 > .col-item {
   width: 20%; }
 
-.wowPhoto.col-6 .item {
+.wowPhoto.col-6 > .col-item {
   width: 16.66667%; }
 
-.wowPhoto.col-7 .item {
+.wowPhoto.col-7 > .col-item {
   width: 14.28571%; }
 
-.wowPhoto.col-8 .item {
+.wowPhoto.col-8 > .col-item {
   width: 12.5%; }
 
-.wowPhoto.col-9 .item {
+.wowPhoto.col-9 > .col-item {
   width: 11.11111%; }
 
-.wowPhoto.col-10 .item {
+.wowPhoto.col-10 > .col-item {
   width: 10%; }
 
-.wowPhoto.col-11 .item {
+.wowPhoto.col-11 > .col-item {
   width: 9.09091%; }
+
+#wowPhoto-pop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(0);
+  z-index: 999;
+  transition: transform .2s ease-in-out; }
+  #wowPhoto-pop.show {
+    transform: scale(1); }
+  #wowPhoto-pop img {
+    display: block;
+    position: absolute;
+    width: auto;
+    height: auto;
+    max-height: 90%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
 
 /*# sourceMappingURL=style.css.map */

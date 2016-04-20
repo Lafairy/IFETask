@@ -5,23 +5,88 @@
 .wowPhoto {
 
     position: relative;
+    overflow: hidden;
 
-    .item {
-
-        position: absolute;
-
-        img {
-            width: 100%;
-            height: auto;
+    .cover {
+        position: relative;
+        &:before {
+            content: '';
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            background-color: #1D9027;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+            z-index: -1;
         }
     }
 
+    .item {
 
+        //position: absolute;
 
+        img {
+            width: 100%!important;
+            height: auto!important;
+
+            cursor: zoom-in;
+        }
+    }
 }
 
+@keyframes loading {
+    0% {
+        border-radius: 0;
+        background-color: #ccc;
+        transform: rotate(0deg);
+    }
+    50% {
+        border-radius: 50%;
+        background-color: #4eba56;
+        transform: rotate(180deg);
+    }
+    100% {
+        border-radius: 1%;
+        background-color: #ccc;
+        transform: rotate(359deg);
+    }
+}
+
+.wowPhoto > .col-item {
+    float: left;
+}
 @for $i from 2 to 12 {
-    .wowPhoto.col-#{$i} .item {
+    .wowPhoto.col-#{$i} > .col-item {
         width: (100% / $i);
+    }
+}
+
+#wowPhoto-pop {
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    transform: scale(0);
+    z-index: 999;
+    transition: transform .2s ease-in-out;
+
+    &.show {
+        transform: scale(1);
+    }
+
+    img {
+        display: block;
+        position: absolute;
+        width: auto;
+        height: auto;
+        max-height: 90%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 }

@@ -27,27 +27,55 @@
 <body>
 
     <div id="wrap">
-        <img src="http://placehold.it/350x150" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x450" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/500x650" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x250" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x350" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x450" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x950" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/850x450" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x650" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/750x550" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x450" alt="alt" data-title="Image Title" class="">
-        <img src="http://placehold.it/350x250" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x150" style="width: 350px;height: 150px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/500x650" style="width: 500px;height: 650px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x250" style="width: 350px;height: 250px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x350" style="width: 350px;height: 350px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x950" style="width: 350px;height: 950px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/850x450" style="width: 850px;height: 450px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x650" style="width: 350px;height: 650px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/750x550" style="width: 750px;height: 550px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" class="">
+        <img src="http://placehold.it/350x250" style="width: 350px;height: 250px;" alt="alt" data-title="Image Title" class="">
     </div>
 
-
+    <div style="text-align: center;margin: 60px 0">
+        <input type="button" id="add" value="添加图片">
+    </div>
 <script>
 
-    wowPhoto({
+    var wow = wowPhoto({
         wrap: '#wrap',
-        col: 5
-    })
+        col: 3
+    });
+
+    //模拟ajax
+    document.querySelector('#add').addEventListener('click', function() {
+
+        var addList = [];
+        for(var i = 0; i < 10; i++) {
+
+            var width = Math.random() * (600 - 300) + 300,
+                height = Math.random() * (800 - 100) + 100;
+
+            width = parseInt(width, 10);
+            height = parseInt(height, 10);
+
+            addList.push({
+                'type': 'img',
+                'width': width,
+                'height': height,
+                'src': 'http://placehold.it/' + width + 'x' + height
+            });
+        }
+
+        for (var item in addList) {
+            console.log(addList[item]);
+            wow.add(addList[item]);
+        }
+    });
 </script>
 
 </body>
