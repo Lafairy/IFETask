@@ -67,6 +67,9 @@
     <img src="./img/6.jpg" alt="Rella">
 </div>
 
+<input type="button" id="p6-grid" value="网格全屏" style="margin-bottom: 60px
+">
+
 <div id="copyright" style="
     color: rgb(195, 147, 147);
     margin-top: 80px;
@@ -106,6 +109,10 @@
 
     document.querySelector('#p5-pop').addEventListener('click', function() {
         p5.pop(0);
+    });
+
+    document.querySelector('#p6-grid').addEventListener('click', function() {
+        p6.grid();
     });
 
     var p6 = yoPhoto({

@@ -1,4 +1,5 @@
-* {
+.yoPhoto,
+.yoPhoto * {
   box-sizing: border-box; }
 
 .yoPhoto {
@@ -6,6 +7,12 @@
   overflow: hidden; }
   .yoPhoto img {
     display: none; }
+  .yoPhoto.grid {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: 100% !important; }
   .yoPhoto .imgCover {
     background-repeat: no-repeat;
     height: 100%;
@@ -36,7 +43,7 @@
       margin-bottom: -3.3rem; }
   .yoPhoto.layout-1 .imgCover {
     width: 100%; }
-  .yoPhoto.layout-2 .imgCover:nth-child(3):hover:after {
+  .yoPhoto.layout-2 .imgCover:first-child:hover:after {
     content: attr(data-alt);
     color: #CFCECC;
     font-weight: 300;
@@ -56,14 +63,14 @@
     clip-path: polygon(66.66666% 0, 100% 0, 100% 100%, 33.33333% 100%); }
   .yoPhoto.layout-3 .imgCover {
     position: absolute; }
-  .yoPhoto.layout-3 .imgCover:last-child {
+  .yoPhoto.layout-3 .imgCover:nth-child(2), .yoPhoto.layout-3 .imgCover:last-child {
     position: absolute;
     right: 0;
-    bottom: 0; }
-  .yoPhoto.layout-3 .imgCover:nth-child(5) {
-    position: absolute;
-    right: 0;
+    height: 50%; }
+  .yoPhoto.layout-3 .imgCover:nth-child(2) {
     top: 0; }
+  .yoPhoto.layout-3 .imgCover:last-child {
+    bottom: 0; }
   .yoPhoto.layout-4 .imgCover {
     width: 50%;
     height: 50%;
@@ -72,10 +79,41 @@
     width: 50%;
     height: 50%;
     float: left; }
-    .yoPhoto.layout-5 .imgCover:nth-child(9), .yoPhoto.layout-5 .imgCover:nth-child(10) {
+    .yoPhoto.layout-5 .imgCover:first-child {
+      height: 66.66666%; }
+    .yoPhoto.layout-5 .imgCover:nth-child(2) {
+      width: 33.33333%; }
+    .yoPhoto.layout-5 .imgCover:nth-child(3), .yoPhoto.layout-5 .imgCover:nth-child(4), .yoPhoto.layout-5 .imgCover:nth-child(5) {
+      width: 33.33333%; }
+    .yoPhoto.layout-5 .imgCover:nth-child(4), .yoPhoto.layout-5 .imgCover:nth-child(5) {
+      height: 33.33333%; }
+    .yoPhoto.layout-5 .imgCover:nth-child(4), .yoPhoto.layout-5 .imgCover:nth-child(5) {
       transform: translateY(-100%); }
   .yoPhoto.layout-6 .imgCover {
-    float: left; }
+    float: left;
+    width: 33.33333333%;
+    height: 33.33333333%; }
+    .yoPhoto.layout-6 .imgCover:first-child {
+      height: 66.66666666%;
+      width: 66.66666666%; }
+    .yoPhoto.layout-6 .imgCover:nth-child(2), .yoPhoto.layout-6 .imgCover:nth-child(3), .yoPhoto.layout-6 .imgCover:nth-child(4) {
+      float: right; }
+  .yoPhoto #yoPhoto-grid-close {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    padding: .4rem;
+    color: #fff;
+    font-size: 3rem;
+    text-shadow: 0 0 10px #000;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all .2s ease-in-out; }
+    .yoPhoto #yoPhoto-grid-close:hover {
+      background-color: rgba(0, 0, 0, 0.4); }
+  .yoPhoto.grid #yoPhoto-grid-close {
+    display: inline-block; }
 
 #yoPhoto-pop {
   position: fixed;
