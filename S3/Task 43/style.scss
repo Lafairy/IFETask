@@ -14,7 +14,9 @@ body.grid {
     overflow: hidden;
 
     img {
-        display: none;
+        width: 100%;
+        height: auto;
+        opacity: 0;
     }
 
     &.grid {
@@ -23,6 +25,15 @@ body.grid {
         top: 0;
         width: 100%!important;
         height: 100%!important;
+        animation: grid-show .2s;
+    }
+    @keyframes grid-show {
+        0% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
 
     .imgCover {
@@ -135,7 +146,7 @@ body.grid {
             float: left;
 
             &:first-child {
-                height: 66.66666%;
+                height: 66.66667%;
             }
             &:nth-child(2) {
                 width: 33.33333%;
@@ -168,8 +179,8 @@ body.grid {
             height: 33.33333333%;
 
             &:first-child {
-                height: 66.66666666%;
-                width: 66.66666666%;
+                height: 66.66667%;
+                width: 66.66667%;
             }
 
             &:nth-child(2),

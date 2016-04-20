@@ -10,13 +10,21 @@ body.grid {
   position: relative;
   overflow: hidden; }
   .yoPhoto img {
-    display: none; }
+    width: 100%;
+    height: auto;
+    opacity: 0; }
   .yoPhoto.grid {
     position: fixed;
     left: 0;
     top: 0;
     width: 100% !important;
-    height: 100% !important; }
+    height: 100% !important;
+    animation: grid-show .2s; }
+@keyframes grid-show {
+  0% {
+    transform: scale(0); }
+  100% {
+    transform: scale(1); } }
   .yoPhoto .imgCover {
     background-repeat: no-repeat;
     height: 100%;
@@ -84,7 +92,7 @@ body.grid {
     height: 50%;
     float: left; }
     .yoPhoto.layout-5 .imgCover:first-child {
-      height: 66.66666%; }
+      height: 66.66667%; }
     .yoPhoto.layout-5 .imgCover:nth-child(2) {
       width: 33.33333%; }
     .yoPhoto.layout-5 .imgCover:nth-child(3), .yoPhoto.layout-5 .imgCover:nth-child(4), .yoPhoto.layout-5 .imgCover:nth-child(5) {
@@ -98,8 +106,8 @@ body.grid {
     width: 33.33333333%;
     height: 33.33333333%; }
     .yoPhoto.layout-6 .imgCover:first-child {
-      height: 66.66666666%;
-      width: 66.66666666%; }
+      height: 66.66667%;
+      width: 66.66667%; }
     .yoPhoto.layout-6 .imgCover:nth-child(2), .yoPhoto.layout-6 .imgCover:nth-child(3), .yoPhoto.layout-6 .imgCover:nth-child(4) {
       float: right; }
   .yoPhoto #yoPhoto-grid-close {

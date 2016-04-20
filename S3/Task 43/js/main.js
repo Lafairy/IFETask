@@ -50,22 +50,12 @@
 
                 event = event || window.event;
 
+                var target = event.target;
+
                 //弹出大图
-                if (event.target.className.indexOf('imgCover') >= 0) {
+                if (target.tagName.toLowerCase() === 'img') {
 
-                    var img = document.createElement('img');
-
-                    self.imgPop.innerHTML = '';
-                    img.src = event.target.dataset.src;
-
-                    self.imgPop.appendChild(img);
-
-                    self.imgPop.className += ' show';
-                }
-
-                //退出网格全屏
-                if(event.target.id === 'yoPhoto-grid-close') {
-                    self.grid(false);
+                    self.pop({src: target.src});
                 }
 
             });
@@ -131,32 +121,42 @@
             }
         },
 
-        pop: function (index) {
+        pop: function (param) {
 
-            var img = this.imgPop.querySelector('img');
+            var img = document.createElement('img'),
+                self = this;
 
-            this.imgPop.className += ' show';
-            img.src = this.imgList[index].src;
+            self.imgPop.innerHTML = '';
+
+            //判断传递过来的是图片src还是索引值
+            img.src = param.src ? param.src : self.imgList[param].src;
+
+            self.imgPop.appendChild(img);
+
+            self.imgPop.className += ' show';
         },
 
         grid: function(status) {
 
             var self = this;
 
+            //判断关闭或打开网格全屏模式
             if(status) {
 
                 self.wrap.className += ' grid';
 
+                //添加关闭按钮
                 var close = self.wrap.querySelector('#yoPhoto-grid-close') || null;
-
                 if(!close) {
 
                     close = document.createElement('div');
                     close.id = 'yoPhoto-grid-close';
                     close.innerText = '×';
                     close.title = '退出网格全屏';
-
                 }
+                close.addEventListener('click', function() {
+                   self.grid(false);
+                });
                 self.wrap.appendChild(close);
 
                 document.body.className += ' grid';
