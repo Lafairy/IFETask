@@ -25,6 +25,7 @@
             self.wrap.style.width = self.width = param.width || '960px';
             self.wrap.style.height = self.height = param.height || '400px';
 
+            //弹出层初始化
             self.imgPop = document.querySelector('#yoPhoto-pop') || null;
             if(!self.imgPop) {
 
@@ -32,6 +33,8 @@
                 self.imgPop.id = 'yoPhoto-pop';
                 document.body.appendChild(self.imgPop);
             }
+
+            //弹出层点击黑色区域隐藏
             self.imgPop.addEventListener('click', function(event) {
                 event = event || window.event;
                 if(event.target.id === 'yoPhoto-pop') {
@@ -39,25 +42,30 @@
                 }
             });
 
+            //布局
             self.layout(self.imgList.length);
 
-            //弹出大图
+
             self.wrap.addEventListener('click', function(event) {
 
-                event = event || window.event
+                event = event || window.event;
 
+                //弹出大图
                 if (event.target.className.indexOf('imgCover') >= 0) {
+
                     var img = document.createElement('img');
 
-                    self.imgPop.className += ' show';
                     self.imgPop.innerHTML = '';
                     img.src = event.target.dataset.src;
 
                     self.imgPop.appendChild(img);
+
+                    self.imgPop.className += ' show';
                 }
 
+                //退出网格全屏
                 if(event.target.id === 'yoPhoto-grid-close') {
-                    self.wrap.className = self.wrap.className.replace('grid', '').trim();
+                    self.grid(false);
                 }
 
             });
@@ -73,6 +81,7 @@
                 height = parseInt(this.height, 10),
                 i;
 
+            //根据图片数量添加对应class
             self.wrap.className +=  ' ' + self.prefix + '-' + count;
 
             for(i = 0; i < self.imgList.length; i++) {
@@ -89,7 +98,6 @@
                 switch (count) {
 
                     case 3:
-                    {
                         switch (i) {
                             case 0:
                                 div.style.width = (width - (height / 2)) * 100 / width + '%';
@@ -99,11 +107,9 @@
                                 div.style.width = (height / 2) * 100 / width + '%';
                                 break;
                         }
-
-                    } break;
+                        break;
 
                     case 5:
-                    {
                         switch (i) {
 
                             case 0:
@@ -116,8 +122,7 @@
                                 div.style.height = (height - width / 3) * 100 / height + '%';
                                 break;
                         }
-
-                    } break;
+                        break;
 
                     default: break;
                 }
@@ -136,21 +141,33 @@
 
         grid: function(status) {
 
-            status = status || true;
-
-            var close = document.createElement('div');
-            close.id = 'yoPhoto-grid-close';
-            close.innerText = '×';
-            close.title = '退出网格全屏';
+            var self = this;
 
             if(status) {
-                this.wrap.className += ' grid';
-                this.wrap.appendChild(close);
-            } else {
 
+                self.wrap.className += ' grid';
+
+                var close = self.wrap.querySelector('#yoPhoto-grid-close') || null;
+
+                if(!close) {
+
+                    close = document.createElement('div');
+                    close.id = 'yoPhoto-grid-close';
+                    close.innerText = '×';
+                    close.title = '退出网格全屏';
+
+                }
+                self.wrap.appendChild(close);
+
+                document.body.className += ' grid';
+
+            } else {
+                self.wrap.className = self.wrap.className.replace(/grid/g, '').trim();
+                document.body.className = document.body.className.replace(/grid/g, '').trim();
             }
         }
     };
+
 
     yoPhoto.prototype.init.prototype = yoPhoto.prototype;
     window.yoPhoto = yoPhoto;

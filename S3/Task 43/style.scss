@@ -3,6 +3,11 @@
     box-sizing: border-box;
 }
 
+body.grid {
+    height: 100%;
+    overflow: hidden;
+}
+
 .yoPhoto {
 
     position: relative;
