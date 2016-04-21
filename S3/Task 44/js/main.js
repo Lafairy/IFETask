@@ -93,10 +93,11 @@
 
             var self = this;
 
-            this.itemList.forEach(function(item) {
-
-                self.add(item);
-            });
+            if(this.itemList.length > 0) {
+                this.itemList.forEach(function(item) {
+                    self.add(item);
+                });
+            }
         },
 
         add: function(item) {
@@ -239,18 +240,52 @@
 
             if(item.title || item.content || item.dataset.title || item.dataset.content) {
 
-                if(!!item.title || !!item.dataset.title) {
+                try {
+                    if(!!item.title) {
 
-                    title = create({tag: 'h3'});
-                    title.innerText = item.title || item.dataset.title;
-                    contentArea.appendChild(title);
+                        title = create({tag: 'h3'});
+                        title.innerText = item.title;
+                        contentArea.appendChild(title);
+
+                    } else if(!!item.dataset.title) {
+
+                        title = create({tag: 'h3'});
+                        title.innerText = item.dataset.title;
+                        contentArea.appendChild(title);
+                    }
+                    if(!!item.content) {
+
+                        description = create({tag: 'p'});
+                        description.innerHTML = item.content;
+                        contentArea.appendChild(description);
+                        log('description');
+
+                    } else if(!!item.dataset.content) {
+
+                        description =create({tag: 'p'});
+                        description.innerText = item.dataset.content;
+                        contentArea.appendChild(description);
+                    }
+                } catch (e) {
+                    //log(e);
                 }
 
-                if(!!item.content || !!item.dataset.content) {
+                try {
 
-                    description =create({tag: 'p'});
-                    description.innerText = item.content || item.dataset.content;
-                    contentArea.appendChild(description);
+                    if(!!item.content) {
+
+                        description = create({tag: 'p'});
+                        description.innerHTML = item.content;
+                        contentArea.appendChild(description);
+
+                    } else if(!!item.dataset.content) {
+
+                        description =create({tag: 'p'});
+                        description.innerText = item.dataset.content;
+                        contentArea.appendChild(description);
+                    }
+                } catch (e) {
+                    //log(e);
                 }
 
                 return contentArea;
@@ -266,6 +301,8 @@
 
     //生成指定元素
     function create(param) {
+
+        param = param || {};
 
         var ele = document.createElement(param.tag || 'div'),
             key;

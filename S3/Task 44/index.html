@@ -44,24 +44,41 @@
             background-color: #27ad60;
             color: #ccc;
         }
+        .loading {
+            position: relative;
+            height: 500px;
+        }
+        .loading:before {
+            content: '';
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            background-color: #1D9027;
+            left: calc(50% - 1rem);
+            top: calc(50% - 1rem);
+            animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+        }
+        @keyframes loading {
+            0% {
+                border-radius: 0;
+                background-color: #ccc;
+                transform: rotate(0deg); }
+            50% {
+                border-radius: 50%;
+                background-color: #4eba56;
+                transform: rotate(180deg); }
+            100% {
+                border-radius: 1%;
+                background-color: #ccc;
+                transform: rotate(359deg); }
+        }
     </style>
 
 </head>
 <body>
 
     <div id="wrap">
-        <img src="http://placehold.it/350x150" style="width: 350px;height: 150px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/500x650" style="width: 500px;height: 650px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x250" style="width: 350px;height: 250px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x350" style="width: 350px;height: 350px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x950" style="width: 350px;height: 950px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/850x450" style="width: 850px;height: 450px;" alt="alt"  class="">
-        <img src="http://placehold.it/350x650" style="width: 350px;height: 650px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/750x550" style="width: 750px;height: 550px;" alt="alt" class="">
-        <img src="http://placehold.it/350x450" style="width: 350px;height: 450px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
-        <img src="http://placehold.it/350x250" style="width: 350px;height: 250px;" alt="alt" data-title="Image Title" data-content="Image Content" class="">
+        <div class="loading"></div>
     </div>
 
     <div style="text-align: center;margin: 20% 0 5% 0">
@@ -69,7 +86,42 @@
     </div>
 <script>
 
-    var wow = wowPhoto({
+    new Promise(function(resolve, reject) {
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('get', 'http://geeku.work/ife/api/img.php', true);
+
+        xhr.send(null);
+
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4) {
+                if(xhr.status == 200) {
+                    resolve(xhr.responseText);
+                } else {
+                    reject();
+                }
+            }
+        }
+
+    }).then(function(val) {
+
+        /*document.querySelector('.loading').remove();*/
+
+        var wow = wowPhoto({
+            wrap: '#wrap',
+            col: 6
+        })
+
+        var imgList = JSON.parse(val);
+
+        imgList.forEach(function (item) {
+            wow.add(item);
+        })
+
+    });
+
+    /*var wow = wowPhoto({
         wrap: '#wrap',
         col: 6
     });
@@ -100,7 +152,7 @@
             console.log(addList[item]);
             wow.add(addList[item]);
         }
-    });
+    });*/
 </script>
 
 </body>
