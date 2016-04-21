@@ -1,37 +1,77 @@
-* {
-    box-sizing: border-box;
-}
-
 .wowPhoto {
 
     position: relative;
     overflow: hidden;
+    font-family: "Microsoft Yahei";
+
+    & * {
+        box-sizing: border-box;
+    }
+
+    .col-item {
+        padding: 0;
+        margin: 0;
+    }
 
     .cover {
         position: relative;
-        &:before {
-            content: '';
-            position: absolute;
-            width: 2rem;
-            height: 2rem;
-            background-color: #1D9027;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
-            z-index: -1;
-        }
+        overflow: hidden;
+        font-size: 0;
     }
 
     .item {
 
-        //position: absolute;
+        height: 100%;
+
+        border-radius: 3px;
+        border: 1px solid #ddd;
+        border-left-color: #eee;
+        border-top-color: #eee;
+        overflow: hidden;
+
+        .img-area {
+            position: relative;
+            background-size: cover;
+            background-position: center center;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 1rem;
+                height: 1rem;
+                background-color: #1D9027;
+                left: calc(50% - .5rem);
+                top: calc(50% - .5rem);
+                animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+                z-index: -1;
+            }
+        }
 
         img {
             width: 100%!important;
             height: auto!important;
 
             cursor: zoom-in;
+
+            opacity: 0;
+        }
+
+        section {
+            background: #fff;
+            padding: .6rem 1rem;
+
+            h3,
+            p {
+                margin: 0;
+                color: #333;
+                font-size: .9rem;
+                font-weight: 300;
+            }
+            h3 {
+                font-size: 1rem;
+                font-weight: 500;
+                margin-bottom: .2rem;
+            }
         }
     }
 }

@@ -22,7 +22,7 @@
             var self = this,
                 i = 0;
 
-            self.wrap = document.querySelector(param.wrap);
+            self.wrap = $(param.wrap);
             self.wrapWidth = self.wrap.offsetWidth;
             self.col = param.col || 3;
             self.wrap.className += ' wowPhoto' + ' col-' + self.col;
@@ -33,7 +33,7 @@
                 self.margin = param.margin.indexOf('px') >= 0 ? parseInt(param.margin, 10) : param.margin;
             }
 
-            self.itemList = this.wrap.querySelectorAll('div,img');
+            self.itemList = $$('div,img', this.wrap);
             self.itemList = Array.prototype.slice.call(self.itemList);
             self.wrap.innerHTML = '';
 
@@ -42,19 +42,16 @@
 
                 self.colHeight[i] = 0;
 
-                var div = document.createElement('div');
-
-                div.className = 'col-item';
+                var div = create({tag: 'ul', className: 'col-item'});
 
                 self.wrap.appendChild(div);
             }
 
             //弹出层初始化
-            self.imgPop = document.querySelector('#wowPhoto-pop') || null;
+            self.imgPop = $('#wowPhoto-pop') || null;
             if(!self.imgPop) {
 
-                self.imgPop = document.createElement('div');
-                self.imgPop.id = 'wowPhoto-pop';
+                self.imgPop = create({id: 'wowPhoto-pop'});
                 document.body.appendChild(self.imgPop);
             }
 
@@ -105,18 +102,27 @@
         add: function(item) {
 
             var self = this,
-                div = document.createElement('div'),
-                cover = document.createElement('div'),
+                container,
+                cover,
+                contentEle,
+                newDiv,
+                imgArea = create({className: 'img-area'}),
+                contentArea = create({tag: 'section', className: 'content-area'}),
                 id = 'wow-item-' + self.currentIndex++,
-                colList = self.wrap.querySelectorAll('.col-item');
+                colList = $$('.col-item', self.wrap);
 
-            div.className = 'item';
-            div.id = id;
 
-            cover.className = 'cover';
-            cover.style.paddingLeft = self.margin / 2 + 'px';
-            cover.style.paddingRight = self.margin / 2 + 'px';
-            cover.style.marginBottom = self.margin + 'px';
+            cover = create({
+                tag: 'li',
+                id: id,
+                className: 'cover',
+                style: {
+                    'paddingLeft': self.margin / 2 + 'px',
+                    'paddingRight': self.margin / 2 + 'px',
+                    'marginBottom': self.margin + 'px'
+                }
+            });
+            container = create({tag: 'article', className: 'item'});
 
             //判断是否为元素
             if(!item.nodeType) {
@@ -125,12 +131,28 @@
 
                     case 'img':
 
-                        var img = document.createElement('img');
-                        img.src = item.src;
-                        img.style.width = item.width + 'px';
-                        img.style.height = item.height + 'px';
+                        var img = create({
+                            tag: 'img',
+                            style: {
+                                'width': item.width + 'px',
+                                'height': item.height + 'px'
+                            },
+                            attr: {
+                                'src': item.src
+                            }
+                        });
 
-                        div.appendChild(img);
+                        imgArea.style.backgroundImage = 'url(' + item.src + ')';
+
+                        imgArea.appendChild(img);
+                        container.appendChild(imgArea);
+
+                        //生成标题与描述模块
+                        contentEle = self._createContent(contentArea, item);
+
+                        if(contentEle) {
+                            container.appendChild(contentEle);
+                        }
 
                         item = img;
 
@@ -138,12 +160,10 @@
 
                     case 'html':
 
-                        var newDiv = document.createElement('div');
+                        newDiv = create('div');
 
                         newDiv.innerHTML = item.html;
-
-                        div.appendChild(newDiv);
-
+                        container.appendChild(newDiv);
                         item = newDiv;
 
                         break;
@@ -151,14 +171,29 @@
                     default: break;
                 }
 
-
-
             } else {
 
                 //判断元素是否为img
-                item.tagName.toLowerCase() === 'img' ?
-                    div.appendChild(item) :
-                    div.innerHTML = item.innerHTML;
+                if (item.tagName.toLowerCase() === 'img') {
+
+                    imgArea.style.backgroundImage = 'url(' + item.src + ')';
+                    imgArea.appendChild(item);
+                    container.appendChild(imgArea);
+
+                    contentEle = self._createContent(contentArea, item);
+
+                    if(contentEle) {
+                        container.appendChild(contentEle);
+                    }
+
+                } else {
+
+                    newDiv = create();
+
+                    newDiv.innerHTML = item.html;
+                    container.appendChild(newDiv);
+                    item = newDiv;
+                }
             }
 
             //判断高度最小的列
@@ -175,19 +210,17 @@
 
             self.colHeight[minKey] += parseInt(calHeight || 0, 10);
 
-            cover.style.height = calHeight + 'px';
-            cover.appendChild(div);
+            imgArea.style.minHeight = calHeight + 'px';
+
+            cover.appendChild(container);
+
             colList[minKey].appendChild(cover);
-            console.log(self.colHeight);
-            /*console.log(itemWidth);
-            console.log(itemHeight);
-            console.log(self.colHeight);*/
 
         },
 
         pop: function (param) {
 
-            var img = document.createElement('img'),
+            var img = create({tag: 'img'}),
                 self = this;
 
             self.imgPop.innerHTML = '';
@@ -199,9 +232,88 @@
 
             self.imgPop.className += ' show';
         },
+
+        _createContent: function(contentArea, item) {
+
+            var title, description;
+
+            if(item.title || item.content || item.dataset.title || item.dataset.content) {
+
+                if(!!item.title || !!item.dataset.title) {
+
+                    title = create({tag: 'h3'});
+                    title.innerText = item.title || item.dataset.title;
+                    contentArea.appendChild(title);
+                }
+
+                if(!!item.content || !!item.dataset.content) {
+
+                    description =create({tag: 'p'});
+                    description.innerText = item.content || item.dataset.content;
+                    contentArea.appendChild(description);
+                }
+
+                return contentArea;
+
+            } else {
+                return false;
+            }
+        }
     };
 
     wowPhoto.prototype.init.prototype = wowPhoto.prototype;
     window.wowPhoto = wowPhoto;
+
+    //生成指定元素
+    function create(param) {
+
+        var ele = document.createElement(param.tag || 'div'),
+            key;
+
+        if(param.id) {
+            ele.id = param.id;
+        }
+
+        if (param.className) {
+            ele.className = param.className;
+        }
+
+        if(param.style) {
+            for(key in param.style) {
+                ele.style[key] = param.style[key];
+            }
+        }
+
+        if(param.attr) {
+            for(key in param.attr) {
+                ele.setAttribute(key, param.attr[key]);
+            }
+        }
+
+        return ele;
+    }
+
+    //获取元素
+    function $(selector, context) {
+
+        if(context) {
+            return context.querySelector(selector);
+        }
+        return document.querySelector(selector);
+    }
+
+    //获取元素列表
+    function $$(selector, context) {
+
+        if(context) {
+            return context.querySelectorAll(selector);
+        }
+        return document.querySelectorAll(selector);
+    }
+
+
+    function log(command) {
+        console.log(command);
+    }
 
 })(window, document);
