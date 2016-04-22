@@ -7,13 +7,11 @@
     wowPhoto.prototype = {
 
         constructor: wowPhoto,
-        wrap: null,
         wrapWidth: 0,
         col: 3,
         width: 0,
         margin: 16,
         imgPop: null,
-        colList: [],
         colHeight: [],
         currentIndex: 0,
 
@@ -39,13 +37,12 @@
                 self.colHeight[i] = 0;
                 self.wrap.innerHTML += '<ul class="col-item"></ul>';
             }
-            //有毒
-            self.colList = $$('.col-item');
 
             //弹出层初始化
             self.imgPop = $('#wowPhoto-pop') || null;
             if(!self.imgPop) {
-                document.body.innerHTML += '<div id="wowPhoto-pop"></div>';
+                document.body.appendChild(create({id: "wowPhoto-pop"}));
+                //self.wrap.innerHTML += '<div id="wowPhoto-pop"></div>'; 会导致self.wrap指向不正确
                 self.imgPop = $('#wowPhoto-pop');
             }
 
@@ -57,7 +54,7 @@
                 }
             });
 
-            self.wrap.addEventListener('click', function(event) {
+            $(param.wrap).addEventListener('click', function(event) {
 
                 event = event || window.event;
                 var target = event.target;
