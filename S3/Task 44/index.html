@@ -64,22 +64,31 @@
 </head>
 <body>
 
-    <div id="wrap">
+    <div id="wow1">
+        <div id="wrap">
+        </div>
+
+        <div style="text-align: center;margin: 20% 0 5% 0">
+            <input type="button" id="add" value="添加图片">
+        </div>
     </div>
 
-    <div style="text-align: center;margin: 20% 0 5% 0">
-        <input type="button" id="add" value="添加图片">
-    </div>
+
 <script>
 
     var index = 0;
 
     var wow = wowPhoto({
         wrap: '#wrap',
-        col: 5
-    });
+        col: 6
+    }).load('http://geeku.work/ife/api/img.php', function(data) {
 
-    getImgs(index);
+        for (var key in data) {
+            data[key].src = 'http://geeku.work/ife/api/imgs/' + data[key].src;
+        }
+
+        return data;
+    });
 
     document.querySelector('#add').addEventListener('click', function() {
         getImgs(++index);
@@ -87,45 +96,13 @@
 
     function getImgs(index) {
 
-        new Promise(function(resolve, reject) {
+        wow.load('http://geeku.work/ife/api/img.php?page=' + index, function(data) {
 
-            document.querySelector('#wrap').innerHTML += '<div class="loading"></div>';
-
-            var xhr = new XMLHttpRequest();
-
-            xhr.open('get', 'http://geeku.work/ife/api/img.php?page=' + index, true);
-
-            xhr.send(null);
-
-            xhr.onreadystatechange = function() {
-                if(xhr.readyState === 4) {
-                    if(xhr.status == 200) {
-                        resolve(xhr.responseText);
-                    } else {
-                        reject();
-                    }
-                }
+            for (var key in data) {
+                data[key].src = 'http://geeku.work/ife/api/imgs/' + data[key].src;
             }
 
-        }).then(function(val) {
-            document.querySelector('.loading').remove();
-
-            if(val == 'null') {
-                var add = document.querySelector('#add');
-                add.value = '暂无图片';
-                add.setAttribute('disabled', 'disabled');
-                add.style.backgroundColor = '#ccc';
-                return;
-            }
-
-            var imgList = JSON.parse(val);
-            console.log(imgList);
-
-            for (var key in imgList) {
-                imgList[key].src = 'http://geeku.work/ife/api/imgs/' + imgList[key].src;
-                wow.add(imgList[key]);
-            }
-
+            return data;
         });
     }
 

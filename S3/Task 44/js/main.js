@@ -66,6 +66,8 @@
             });
 
             self.layout();
+
+            return this;
         },
 
         layout: function() {
@@ -195,6 +197,36 @@
             self.imgPop.innerHTML = html.replacer([src]);
 
             self.imgPop.className += ' show';
+
+            return this;
+        },
+
+        load: function(url, dealWith) {
+
+            var self = this;
+
+            self.wrap.appendChild(create({className: 'loading'}));
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('get', url, true);
+            xhr.send(null);
+
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status == 200) {
+
+                        $('.loading', self.wrap).remove();
+
+                        var retData = dealWith(JSON.parse(xhr.responseText));
+                        for (var key in retData) {
+                            self.add(retData[key]);
+                        }
+                    }
+                }
+            };
+
+            return this;
         },
 
         _getContent: function(item) {
