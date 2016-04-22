@@ -33,8 +33,7 @@
         animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
         z-index: -1; }
     .wowPhoto .item img {
-      width: 100% !important;
-      height: auto !important;
+      height: 100% !important;
       cursor: zoom-in;
       opacity: 0; }
     .wowPhoto .item section {
@@ -50,6 +49,24 @@
         font-size: 1rem;
         font-weight: 500;
         margin-bottom: .2rem; }
+    .wowPhoto .item.no-content .content-area p {
+      display: none; }
+    .wowPhoto .item.no-title .content-area h3 {
+      display: none; }
+  .wowPhoto .loading {
+    position: relative;
+    height: 100px;
+    float: left;
+    width: 100%; }
+  .wowPhoto .loading:before {
+    content: '';
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    background-color: #1D9027;
+    left: calc(50% - 1rem);
+    top: calc(50% - 1rem);
+    animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite; }
 
 @keyframes loading {
   0% {

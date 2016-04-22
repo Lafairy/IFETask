@@ -12,8 +12,8 @@
         col: 3,
         width: 0,
         margin: 16,
-        itemList: [],
         imgPop: null,
+        colList: [],
         colHeight: [],
         currentIndex: 0,
 
@@ -33,26 +33,20 @@
                 self.margin = param.margin.indexOf('px') >= 0 ? parseInt(param.margin, 10) : param.margin;
             }
 
-            self.itemList = $$('div,img', this.wrap);
-            self.itemList = Array.prototype.slice.call(self.itemList);
-            self.wrap.innerHTML = '';
-
             //初始化各列高度并添加列div
+            self.wrap.innerHTML = '';
             for(i = 0; i < self.col; i++) {
-
                 self.colHeight[i] = 0;
-
-                var div = create({tag: 'ul', className: 'col-item'});
-
-                self.wrap.appendChild(div);
+                self.wrap.innerHTML += '<ul class="col-item"></ul>';
             }
+            //有毒
+            self.colList = $$('.col-item');
 
             //弹出层初始化
             self.imgPop = $('#wowPhoto-pop') || null;
             if(!self.imgPop) {
-
-                self.imgPop = create({id: 'wowPhoto-pop'});
-                document.body.appendChild(self.imgPop);
+                document.body.innerHTML += '<div id="wowPhoto-pop"></div>';
+                self.imgPop = $('#wowPhoto-pop');
             }
 
             //弹出层点击黑色区域隐藏
@@ -66,35 +60,24 @@
             self.wrap.addEventListener('click', function(event) {
 
                 event = event || window.event;
-
                 var target = event.target;
 
                 //弹出大图
                 if (target.tagName.toLowerCase() === 'img') {
-
                     self.pop({src: target.src});
                 }
-
             });
 
             self.layout();
-
-            //窗口大小变化
-            /*window.addEventListener('resize', function() {
-
-                self.wrapWidth = self.wrap.offsetWidth;
-                self.width = Math.floor(self.wrapWidth / self.col);
-
-                self.layout();
-            });*/
         },
 
         layout: function() {
 
-            var self = this;
+            var self = this,
+                itemList = Array.prototype.slice.call($$('div,img', self.wrap));
 
-            if(this.itemList.length > 0) {
-                this.itemList.forEach(function(item) {
+            if(itemList.length > 0) {
+                itemList.forEach(function(item) {
                     self.add(item);
                 });
             }
@@ -103,71 +86,63 @@
         add: function(item) {
 
             var self = this,
-                container,
-                cover,
-                contentEle,
-                newDiv,
-                imgArea = create({className: 'img-area'}),
-                contentArea = create({tag: 'section', className: 'content-area'}),
+                colList,
                 id = 'wow-item-' + self.currentIndex++,
-                colList = $$('.col-item', self.wrap);
+                imgAreaStyle,
+                imgStyle ,
+                imgSrc,
+                contentArea,
+                itemClass,
+                title,
+                content,
 
+                coverStyle = 'padding-left: ' + self.margin / 2 + 'px;' +
+                             'padding-right: ' + self.margin / 2 + 'px;' +
+                             'margin-bottom: ' + self.margin + 'px;',
 
-            cover = create({
-                tag: 'li',
-                id: id,
-                className: 'cover',
-                style: {
-                    'paddingLeft': self.margin / 2 + 'px',
-                    'paddingRight': self.margin / 2 + 'px',
-                    'marginBottom': self.margin + 'px'
-                }
-            });
-            container = create({tag: 'article', className: 'item'});
+                //完整的带插入元素的HTML
+                fullFormat = '' +
+                    '<li id="{0}" class="cover" style="{1}">' +
+                        '<article class="item {2}">' +
+                            '<div class="img-area" style="{3}">' +
+                                '<img src="{4}" style="{5}">' +
+                            '</div>' +
+                            '<section class="content-area">' +
+                                '<h3>{6}</h3>' +
+                                '<p>{7}</p>' +
+                            '</section>' +
+                        '</article>' +
+                    '</li>';
 
-            //判断是否为元素
+            //计算高度
+            var itemWidth = parseInt(item.width || (item.style && item.style.width), 10),
+                itemHeight = parseInt(item.height || (item.style && item.style.height), 10),
+                calHeight = ((self.width - self.margin) / itemWidth) * itemHeight + self.margin;
+
             if(!item.nodeType) {
 
+                //通过传入JSON插入元素
                 switch (item.type) {
 
                     case 'img':
 
-                        var img = create({
-                            tag: 'img',
-                            style: {
-                                'width': item.width + 'px',
-                                'height': item.height + 'px'
-                            },
-                            attr: {
-                                'src': item.src
-                            }
-                        });
+                        imgSrc = item.src;
 
-                        imgArea.style.backgroundImage = 'url(' + item.src + ')';
+                        imgAreaStyle = 'height: ' + calHeight + 'px; ' +
+                                       'background-image: url(' + imgSrc + ');';
 
-                        imgArea.appendChild(img);
-                        container.appendChild(imgArea);
+                        imgStyle = 'width:' + item.width + 'px; ' +
+                                   'height:' + item.height + 'px';
 
-                        //生成标题与描述模块
-                        contentEle = self._createContent(contentArea, item);
-
-                        if(contentEle) {
-                            container.appendChild(contentEle);
-                        }
-
-                        item = img;
+                        //获取title和content
+                        contentArea = self._getContent(item);
+                        itemClass = contentArea.className;
+                        title = contentArea.title;
+                        content = contentArea.content;
 
                         break;
 
-                    case 'html':
-
-                        newDiv = create('div');
-
-                        newDiv.innerHTML = item.html;
-                        container.appendChild(newDiv);
-                        item = newDiv;
-
-                        break;
+                    case 'html': break; //Todo
 
                     default: break;
                 }
@@ -177,121 +152,86 @@
                 //判断元素是否为img
                 if (item.tagName.toLowerCase() === 'img') {
 
-                    imgArea.style.backgroundImage = 'url(' + item.src + ')';
-                    imgArea.appendChild(item);
-                    container.appendChild(imgArea);
+                    imgSrc = item.src;
 
-                    contentEle = self._createContent(contentArea, item);
+                    imgAreaStyle = 'height: ' + calHeight + 'px; ' +
+                        'background-image: url(' + imgSrc + ');';
 
-                    if(contentEle) {
-                        container.appendChild(contentEle);
-                    }
+                    imgStyle = 'width:' + item.style.width + 'px; ' +
+                        'height:' + item.style.height + 'px';
+
+                    contentArea = self._getContent(item);
+                    itemClass = contentArea.className;
+                    title = contentArea.title;
+                    content = contentArea.content;
 
                 } else {
-
-                    newDiv = create();
-
-                    newDiv.innerHTML = item.html;
-                    container.appendChild(newDiv);
-                    item = newDiv;
+                   //Todo
                 }
             }
 
-            //判断高度最小的列
-            var minVal = self.colHeight[0],
-                minKey = 0;
-            for(var key = 0; key < self.colHeight.length; key++) {
-                minKey = self.colHeight[key] < minVal ? key : minKey;
-            }
+            //替换字符串内指定位置的内容
+            var html = fullFormat.replacer([
+                id, coverStyle, itemClass,
+                imgAreaStyle, imgSrc, imgStyle,
+                title, content
+            ]);
 
-            //更新各列的高度
-            var itemWidth = parseInt(item.style.width, 10),
-                itemHeight = parseInt(item.style.height, 10),
-                calHeight = ((self.width - self.margin) / itemWidth) * itemHeight;
-
+            //获取瀑布流中最短的一列
+            var minKey = self.colHeight.min().index;
             self.colHeight[minKey] += parseInt(calHeight || 0, 10);
 
-            imgArea.style.minHeight = calHeight + 'px';
-
-            cover.appendChild(container);
-
-            colList[minKey].appendChild(cover);
-
+            //插入元素
+            colList = $$('.col-item');
+            colList[minKey].innerHTML += html;
         },
 
         pop: function (param) {
 
-            var img = create({tag: 'img'}),
-                self = this;
-
-            self.imgPop.innerHTML = '';
+            var src,
+                self = this,
+                html = '<img src="{0}">';
 
             //判断传递过来的是图片src还是索引值
-            img.src = param.src ? param.src : self.imgList[param].src;
+            src = param.src ? param.src : self.imgList[param].src;
 
-            self.imgPop.appendChild(img);
+            self.imgPop.innerHTML = html.replacer([src]);
 
             self.imgPop.className += ' show';
         },
 
-        _createContent: function(contentArea, item) {
+        _getContent: function(item) {
 
-            var title, description;
+            var title,
+                content,
+                className;
 
-            if(item.title || item.content || item.dataset.title || item.dataset.content) {
-
-                try {
-                    if(!!item.title) {
-
-                        title = create({tag: 'h3'});
-                        title.innerText = item.title;
-                        contentArea.appendChild(title);
-
-                    } else if(!!item.dataset.title) {
-
-                        title = create({tag: 'h3'});
-                        title.innerText = item.dataset.title;
-                        contentArea.appendChild(title);
-                    }
-                    if(!!item.content) {
-
-                        description = create({tag: 'p'});
-                        description.innerHTML = item.content;
-                        contentArea.appendChild(description);
-                        log('description');
-
-                    } else if(!!item.dataset.content) {
-
-                        description =create({tag: 'p'});
-                        description.innerText = item.dataset.content;
-                        contentArea.appendChild(description);
-                    }
-                } catch (e) {
-                    //log(e);
-                }
-
-                try {
-
-                    if(!!item.content) {
-
-                        description = create({tag: 'p'});
-                        description.innerHTML = item.content;
-                        contentArea.appendChild(description);
-
-                    } else if(!!item.dataset.content) {
-
-                        description =create({tag: 'p'});
-                        description.innerText = item.dataset.content;
-                        contentArea.appendChild(description);
-                    }
-                } catch (e) {
-                    //log(e);
-                }
-
-                return contentArea;
-
+            if(item.title) {
+                title = item.title
+            } else if(item.dataset && item.dataset.title) {
+                title = item.dataset.title;
             } else {
-                return false;
+                title = '';
+            }
+
+            if(item.content) {
+                content = item.content
+            } else if(item.dataset && item.dataset.content) {
+                content = item.dataset.content;
+            } else {
+                content = '';
+            }
+
+            if(!title && !content) {
+                className = 'no-title-content';
+            } else {
+                className = (!title ? 'no-title' : '') + (!content ? 'no-content' : '');
+            }
+
+            return {
+                title: title,
+                content: content,
+                className: className
             }
         }
     };
@@ -352,5 +292,40 @@
     function log(command) {
         console.log(command);
     }
+
+    String.prototype.replacer = function(arr) {
+
+        var fullStr = this.toString();
+
+        for(var i=0; i<arr.length; i++) {
+            fullStr = fullStr.replace('{' + i + '}', arr[i]);
+        }
+
+        return fullStr;
+    };
+    Object.defineProperty(String.prototype, 'replacer', {
+        enumerable: false
+    });
+
+    Array.prototype.min = function() {
+
+        var minVal = this[0],
+            index = 0;
+        for (var key in this) {
+            if(this[key] < minVal) {
+                index = key;
+                minVal = this[key];
+            }
+        }
+
+        return {
+            index: index,
+            value: minVal
+        };
+    };
+
+    Object.defineProperty(Array.prototype, 'min', {
+        enumerable: false
+    });
 
 })(window, document);
