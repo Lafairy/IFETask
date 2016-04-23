@@ -37,6 +37,7 @@
                 self.colHeight[i] = 0;
                 self.wrap.innerHTML += '<ul class="col-item"></ul>';
             }
+            self.colList = $$('.col-item', self.wrap);
 
             //弹出层初始化
             self.imgPop = $('#wowPhoto-pop') || null;
@@ -85,7 +86,7 @@
         add: function(item) {
 
             var self = this,
-                colList,
+                //colList,
                 id = 'wow-item-' + self.currentIndex++,
                 imgAreaStyle,
                 imgStyle ,
@@ -94,24 +95,28 @@
                 itemClass,
                 title,
                 content,
-
-                coverStyle = 'padding-left: ' + self.margin / 2 + 'px;' +
-                             'padding-right: ' + self.margin / 2 + 'px;' +
-                             'margin-bottom: ' + self.margin + 'px;',
+                cover = create({
+                    tag: 'li',
+                    id: id,
+                    className: 'cover',
+                    style: {
+                        'padding-left': self.margin / 2 + 'px',
+                        'padding-right': self.margin / 2 + 'px',
+                        'margin-bottom': self.margin + 'px'
+                    }
+                }),
 
                 //完整的带插入元素的HTML
                 fullFormat = '' +
-                    '<li id="{0}" class="cover" style="{1}">' +
-                        '<article class="item {2}">' +
-                            '<div class="img-area" style="{3}">' +
-                                '<img src="{4}" style="{5}">' +
+                        '<article class="item {0}">' +
+                            '<div class="img-area" style="{1}">' +
+                                '<img src="{2}" style="{3}">' +
                             '</div>' +
                             '<section class="content-area">' +
-                                '<h3>{6}</h3>' +
-                                '<p>{7}</p>' +
+                                '<h3>{4}</h3>' +
+                                '<p>{5}</p>' +
                             '</section>' +
-                        '</article>' +
-                    '</li>';
+                        '</article>';
 
             //计算高度
             var itemWidth = parseInt(item.width || (item.style && item.style.width), 10),
@@ -171,18 +176,19 @@
 
             //替换字符串内指定位置的内容
             var html = fullFormat.replacer([
-                id, coverStyle, itemClass,
-                imgAreaStyle, imgSrc, imgStyle,
-                title, content
+                itemClass, imgAreaStyle, imgSrc, imgStyle, title, content
             ]);
+
+            cover.innerHTML = html;
 
             //获取瀑布流中最短的一列
             var minKey = self.colHeight.min().index;
             self.colHeight[minKey] += parseInt(calHeight || 0, 10);
 
             //插入元素
-            colList = $$('.col-item');
-            colList[minKey].innerHTML += html;
+            //colList = $$('.col-item');
+            //colList[minKey].innerHTML += html;
+            self.colList[minKey].appendChild(cover);
         },
 
         pop: function (param) {
