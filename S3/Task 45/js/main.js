@@ -9,17 +9,20 @@
         constructor: xiuPhoto,
         minImgCount: 3,
         maxImgCount: 6,
+        imgCounter: 0,
 
         init: function(param) {
 
             var self = this;
 
-            self.minHeight = 400;
+            self.minHeight = 300;
             self.scope = 50;
 
             self.wrap = $(param.wrap);
             self.width = self.wrap.offsetWidth;
-            self.imgList = $$('img', self.wrap);
+            self.wrap.className += ' xiuPhoto';
+            self.imgList = Array.prototype.slice.call($$('img', self.wrap));
+            self.padding = param.padding ? param.padding.replace('px', '') : 0;
 
             self.createCol(self.imgList);
 
@@ -29,7 +32,7 @@
 
             var self = this,
                 tempList = [],
-                i, j, k = 0, widthSum, colCount = 0, imgCounter = 0;
+                i, j, k = 0, widthSum, rowCount = 0, rowImgCounter = 0, prevImg;
 
             if(imgList.type && imgList.type.toLowerCase() === 'json') {
 
@@ -56,30 +59,37 @@
                 imgList = tempList;
             }
 
+            var notFull = $('.not-full', self.wrap);
+            if(notFull) {
+                prevImg = Array.prototype.slice.call($$('img', notFull));
+                prevImg.forEach(function(item) {
+                    imgList.unshift(item);
+                });
+                notFull.remove();
+            }
+
             for(; k < imgList.length; k = i + 1) {
 
                 widthSum = 0;
-                imgCounter = 0;
+                rowImgCounter = 0;
 
                 for (i = k; i < imgList.length; i++) {
 
-                    imgCounter++;
+                    rowImgCounter++;
 
                     //如果图片超过6个则退出循环
-                    if(imgCounter > self.maxImgCount) {
+                    if(rowImgCounter > self.maxImgCount) {
                         break;
                     }
 
                     //先按最小高度叠加
                     widthSum += (self.minHeight / imgList[i].height) * imgList[i].width;
 
-                    log(widthSum);
-                    log(self.width - self.scope);
                     //如果缩放后的宽度加起来超过了宽度 - 范围则退出循环
                     if(widthSum >= (self.width - self.scope)) {
 
                         //如果图片数量少于3个则继续添加
-                        if(imgCounter < self.minImgCount) {
+                        if(rowImgCounter < self.minImgCount) {
                             continue;
                         }
 
@@ -87,19 +97,46 @@
                     }
                 }
 
-                for(j=k; j<=i; j++) {
+                //计算宽度缩放到容器宽度时的缩放比例，并计算此时的实际高度
+                var ratio = widthSum / self.width,
+                    height = self.minHeight / ratio,
+                    imgRow = create({
+                        tag: 'ul',
+                        className: 'img-row',
+                        id: 'xiuPhoto-row-' + rowCount++,
+                        style: {
+                            'height': height + 'px'
+                        }
+                    });
 
-                    //计算宽度缩放到容器宽度时的缩放比例，并计算此时的实际高度
-                    var ratio = widthSum / self.width,
-                        height = self.minHeight / ratio;
+                if((imgList.length - k) < 3) {
+                    imgRow.style.height = self.minHeight + 'px';
+                    imgRow.className += ' not-full';
+                }
+                self.wrap.appendChild(imgRow);
+
+                for(j = k; j <= i; j++) {
 
                     //图片按比例缩放
                     var oHeight = imgList[j].height,
                         oWidth = imgList[j].width,
-                        imgRatio = height / oHeight;
+                        imgRatio = height / oHeight,
+                        item = create({
+                            tag: 'li',
+                            className: 'img-item',
+                            id: 'xiuPhoto-item-' + self.imgCounter++,
+                            style: {
+                                'width': oWidth * imgRatio + 'px',
+                                'padding': self.padding / 2 + 'px'
+                            }
+                        });
 
-                    imgList[j].style.height = height + 'px';
-                    imgList[j].style.width = oWidth * imgRatio + 'px';
+                    if((imgList.length - k) < 3) {
+                        item.style.width = (self.minHeight / oHeight) * oWidth + 'px';
+                    }
+
+                    item.appendChild(imgList[j]);
+                    imgRow.appendChild(item);
 
                     log(imgList[j]);
                 }
@@ -133,7 +170,7 @@
             };
 
             return this;
-        },
+        }
     };
 
     xiuPhoto.prototype.init.prototype = xiuPhoto.prototype;
