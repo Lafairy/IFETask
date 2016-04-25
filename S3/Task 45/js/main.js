@@ -36,25 +36,27 @@
 
             if(imgList.type && imgList.type.toLowerCase() === 'json') {
 
-                imgList.data.forEach(function(item) {
+                var data = imgList.data;
+                for (var key in data) {
+
                     var img = create({
                         tag: 'img',
                         attr: {
-                            src: item.src,
-                            width: item.width,
-                            height: item.height
+                            src: data[key].src,
+                            width: data[key].width,
+                            height: data[key].height
                         }
                     });
 
-                    if(item.content) {
-                        img.dataset.content = item.content;
+                    if(data[key].content) {
+                        img.dataset.content = data[key].content;
                     }
-                    if(item.title) {
-                        img.dataset.title = item.title;
+                    if(data[key].title) {
+                        img.dataset.title = data[key].title;
                     }
 
                     tempList.push(img);
-                });
+                }
 
                 imgList = tempList;
             }
@@ -62,7 +64,7 @@
             var notFull = $('.not-full', self.wrap);
             if(notFull) {
                 prevImg = Array.prototype.slice.call($$('img', notFull));
-                prevImg.forEach(function(item) {
+                prevImg.reverse().forEach(function(item) {
                     imgList.unshift(item);
                 });
                 notFull.remove();
@@ -118,6 +120,9 @@
                 for(j = k; j <= i; j++) {
 
                     //图片按比例缩放
+                    if(!imgList[j]) {
+                        return;
+                    }
                     var oHeight = imgList[j].height,
                         oWidth = imgList[j].width,
                         imgRatio = height / oHeight,
@@ -137,8 +142,6 @@
 
                     item.appendChild(imgList[j]);
                     imgRow.appendChild(item);
-
-                    log(imgList[j]);
                 }
             }
 
@@ -162,9 +165,8 @@
                         $('.loading', self.wrap).remove();
 
                         var retData = dealWith(JSON.parse(xhr.responseText));
-                        for (var key in retData) {
-                            self.add(retData[key]);
-                        }
+
+                        self.createCol(retData);
                     }
                 }
             };

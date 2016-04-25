@@ -18,6 +18,42 @@
             margin: 5% auto;
             font-size: 0;
         }
+        #add {
+            border: none;
+            background-color: #2ecc71;
+            border-radius: 3px;
+            outline: none;
+            padding: .4rem 1rem;
+            margin-left: .6rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
+            -webkit-appearance: none;
+        }
+        #add:hover {
+            background-color: #58d68d;
+        }
+        #add:active {
+            background-color: #27ad60;
+            color: #ccc;
+        }
+
+        @keyframes loading {
+            0% {
+                border-radius: 0;
+                background-color: #ccc;
+                transform: rotate(0deg); }
+            50% {
+                border-radius: 50%;
+                background-color: #4eba56;
+                transform: rotate(180deg); }
+            100% {
+                border-radius: 1%;
+                background-color: #ccc;
+                transform: rotate(359deg); }
+        }
     </style>
 </head>
 <body>
@@ -25,46 +61,42 @@
     <div id="wrap">
         <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
         <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/3.jpg" alt="" width="1500" height="1059">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
-        <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
         <img src="../Task%2043/img/6.jpg" alt="" width="1639" height="1165">
-        <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/4.jpg" alt="" width="1200" height="839">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
         <img src="../Task%2043/img/3.jpg" alt="" width="1500" height="1059">
         <img src="../Task%2043/img/4.jpg" alt="" width="1200" height="839">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
+        <img src="../Task%2043/img/5.jpg" alt="" width="1200" height="850">
         <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
-        <img src="../Task%2043/img/6.jpg" alt="" width="1639" height="1165">
-        <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
-        <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/3.jpg" alt="" width="1500" height="1059">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
-        <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
-        <img src="../Task%2043/img/6.jpg" alt="" width="1639" height="1165">
-        <img src="../Task%2043/img/1.jpg" alt="" width="1200" height="850">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/4.jpg" alt="" width="1200" height="839">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/3.jpg" alt="" width="1500" height="1059">
-        <img src="../Task%2043/img/4.jpg" alt="" width="1200" height="839">
-        <img src="../Task%2043/img/7.jpg" alt="" width="768" height="1086">
-        <img src="../Task%2043/img/2.jpg" alt="" width="1440" height="986">
-        <img src="../Task%2043/img/6.jpg" alt="" width="1639" height="1165">
-        <img src="../Task%2043/img/4.jpg" alt="" width="1639" height="1165">
+    </div>
+
+    <div style="text-align: center;margin: 20% 0 5% 0">
+        <input type="button" id="add" value="添加图片">
     </div>
 
     <script>
         var xiu = xiuPhoto({
             wrap: '#wrap',
-            padding: '16px'
+            padding: '8px'
         });
+
+        var index = 0;
+        document.querySelector('#add').addEventListener('click', function() {
+            getImgs(++index);
+        });
+
+        function getImgs(index) {
+
+            xiu.load('http://geeku.work/ife/api/img.php?page=' + index, function(data) {
+
+                for (var key in data) {
+                    data[key].src = 'http://geeku.work/ife/api/imgs/' + data[key].src;
+                }
+
+                return {
+                    type: 'json',
+                    data: data
+                };
+            });
+        }
     </script>
 
 </body>
