@@ -30,9 +30,34 @@
         margin: 0; }
       .xiuPhoto .img-item header.no-title-content {
         display: none; }
+    .xiuPhoto .img-item:before {
+      content: '';
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      background-color: #1D9027;
+      left: calc(50% - .5rem);
+      top: calc(50% - .5rem);
+      animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+      z-index: -1; }
     .xiuPhoto .img-item:hover header {
       opacity: 1; }
+    .xiuPhoto .img-item:hover img {
+      opacity: .8; }
 
+@keyframes loading {
+  0% {
+    border-radius: 0;
+    background-color: #ccc;
+    transform: rotate(0deg); }
+  50% {
+    border-radius: 50%;
+    background-color: #4eba56;
+    transform: rotate(180deg); }
+  100% {
+    border-radius: 1%;
+    background-color: #ccc;
+    transform: rotate(359deg); } }
 #xiuPhoto-pop {
   position: fixed;
   left: 0;
