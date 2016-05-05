@@ -2,6 +2,8 @@
 
 
 $main-color: #14BF23;
+$main-color-light: lighten($main-color, 50%);
+$font-color: #34495e;
 
 * {
     box-sizing: border-box;
@@ -10,6 +12,12 @@ body,
 html {
     background-color: #eee;
     font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+    color: $font-color;
+}
+input {
+    font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+    color: $font-color;
+    background-color: transparent;
 }
 
 input[type=button] {
@@ -25,6 +33,15 @@ input[type=button] {
     &.large {
         font-size: 1.6rem;
         padding: .8rem 1.4rem;
+    }
+    &.gray {
+        background-color: #eee;
+        color: #333;
+    }
+    &.transparent {
+        background-color: transparent;
+        border: 1px solid #eee;
+        color: $font-color;
     }
 
     &.large {
@@ -108,3 +125,91 @@ input[type=button] {
     text-align: center;
     padding: 2rem;
 }
+
+#edit-item {
+    h1 {
+        margin: 0;
+        input {
+            width: 100%;
+            text-align: center;
+            padding: .5rem 0;
+        }
+    }
+
+    .edit {
+        transition: .2s background-color ease-in-out;
+        &:hover {
+            background-color: $main-color-light;
+            //color: #fff;
+        }
+        input[type=text] {
+            border: none;
+            outline: none;
+        }
+    }
+
+    .content {
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+        border-top: 2px solid #eee;
+        border-bottom: 2px solid #eee;
+    }
+    .add-list {
+
+        border: 1px solid #eee;
+
+        p {
+            padding: 2rem;
+            background-color: #eee;
+            font-size: 1.2rem;
+            color: #aaa;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .item-option {
+            display: none;
+            margin: 1rem 0;
+
+            &.show {
+                display: block;
+            }
+
+            input {
+                margin: 0 .5rem;
+            }
+        }
+
+    }
+    .list {
+        text-align: left;
+
+        ul {
+            padding: 0;
+
+            li {
+                list-style: none;
+            }
+        }
+
+        .list-item {
+            padding: 1rem;
+
+            li {
+                margin-bottom: .5rem;
+            }
+        }
+
+        h3 {
+            margin: 0;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .control {
+            text-align: right;
+        }
+    }
+}
+

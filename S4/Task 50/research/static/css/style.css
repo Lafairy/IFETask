@@ -370,7 +370,13 @@ textarea {
 body,
 html {
   background-color: #eee;
-  font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important; }
+  font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+  color: #34495e; }
+
+input {
+  font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+  color: #34495e;
+  background-color: transparent; }
 
 input[type=button] {
   background-color: #14BF23;
@@ -384,6 +390,13 @@ input[type=button] {
   input[type=button].large {
     font-size: 1.6rem;
     padding: .8rem 1.4rem; }
+  input[type=button].gray {
+    background-color: #eee;
+    color: #333; }
+  input[type=button].transparent {
+    background-color: transparent;
+    border: 1px solid #eee;
+    color: #34495e; }
   input[type=button].large {
     font-size: 1.6rem;
     padding: .8rem 1.6rem; }
@@ -445,5 +458,57 @@ input[type=button] {
 .no-item {
   text-align: center;
   padding: 2rem; }
+
+#edit-item h1 {
+  margin: 0; }
+  #edit-item h1 input {
+    width: 100%;
+    text-align: center;
+    padding: .5rem 0; }
+#edit-item .edit {
+  transition: .2s background-color ease-in-out; }
+  #edit-item .edit:hover {
+    background-color: #d7fbda; }
+  #edit-item .edit input[type=text] {
+    border: none;
+    outline: none; }
+#edit-item .content {
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee; }
+#edit-item .add-list {
+  border: 1px solid #eee; }
+  #edit-item .add-list p {
+    padding: 2rem;
+    background-color: #eee;
+    font-size: 1.2rem;
+    color: #aaa;
+    margin: 0;
+    cursor: pointer; }
+  #edit-item .add-list .item-option {
+    display: none;
+    margin: 1rem 0; }
+    #edit-item .add-list .item-option.show {
+      display: block; }
+    #edit-item .add-list .item-option input {
+      margin: 0 .5rem; }
+#edit-item .list {
+  text-align: left; }
+  #edit-item .list ul {
+    padding: 0; }
+    #edit-item .list ul li {
+      list-style: none; }
+  #edit-item .list .list-item {
+    padding: 1rem; }
+    #edit-item .list .list-item li {
+      margin-bottom: .5rem; }
+  #edit-item .list h3 {
+    margin: 0;
+    margin-bottom: 2rem;
+    font-weight: 500; }
+  #edit-item .list .control {
+    text-align: right; }
 
 /*# sourceMappingURL=style.css.map */
