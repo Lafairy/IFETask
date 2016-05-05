@@ -379,7 +379,7 @@ input {
   background-color: transparent; }
 
 input[type=button] {
-  background-color: #14BF23;
+  background-color: #23A22E;
   color: #fff;
   border: none;
   padding: .5rem 1rem;
@@ -411,7 +411,7 @@ input[type=button] {
   margin: 0 auto; }
 
 #main-menu {
-  background-color: #14BF23; }
+  background-color: #23A22E; }
   #main-menu a {
     color: #fff;
     font-weight: 400;
@@ -420,7 +420,7 @@ input[type=button] {
     #main-menu a span {
       background-color: #fff;
       display: inline-block;
-      color: #14BF23;
+      color: #23A22E;
       width: 1.6rem;
       height: 1.6rem;
       vertical-align: baseline;
@@ -447,7 +447,7 @@ input[type=button] {
     padding: 1rem;
     font-size: 1rem; }
   #main-menu ul .v-link-active {
-    background-color: #16d627; }
+    background-color: #28b734; }
 
 .wrap {
   margin: 5% auto;
@@ -465,13 +465,27 @@ input[type=button] {
     width: 100%;
     text-align: center;
     padding: .5rem 0; }
+#edit-item input[type=checkbox],
+#edit-item input[type=radio] {
+  vertical-align: middle; }
 #edit-item .edit {
-  transition: .2s background-color ease-in-out; }
+  transition: .2s all ease-in-out;
+  border-left: 0px solid #eee; }
   #edit-item .edit:hover {
-    background-color: #d7fbda; }
-  #edit-item .edit input[type=text] {
+    border-left-width: 5px; }
+  #edit-item .edit input[type=text],
+  #edit-item .edit textarea {
     border: none;
-    outline: none; }
+    outline: none;
+    border-bottom: 1px solid transparent;
+    padding: .4rem; }
+    #edit-item .edit input[type=text]:focus,
+    #edit-item .edit textarea:focus {
+      background-color: #e4f9e6; }
+  #edit-item .edit textarea {
+    max-width: 100%;
+    min-width: 50%;
+    border: 1px solid #eee; }
 #edit-item .content {
   padding: 2rem;
   margin: 2rem 0;
@@ -501,9 +515,7 @@ input[type=button] {
     #edit-item .list ul li {
       list-style: none; }
   #edit-item .list .list-item {
-    padding: 1rem; }
-    #edit-item .list .list-item li {
-      margin-bottom: .5rem; }
+    padding: 1rem 2rem; }
   #edit-item .list h3 {
     margin: 0;
     margin-bottom: 2rem;

@@ -1,8 +1,8 @@
 @import "normalize";
 
 
-$main-color: #14BF23;
-$main-color-light: lighten($main-color, 50%);
+$main-color: #23A22E;
+$main-color-light: lighten($main-color, 55%);
 $font-color: #34495e;
 
 * {
@@ -135,16 +135,35 @@ input[type=button] {
             padding: .5rem 0;
         }
     }
-
+    input[type=checkbox],
+    input[type=radio] {
+        //margin-right: .5rem;
+        vertical-align: middle;
+    }
     .edit {
-        transition: .2s background-color ease-in-out;
+        transition: .2s all ease-in-out;
+        border-left: 0px solid #eee;
         &:hover {
-            background-color: $main-color-light;
+            border-left-width: 5px;
+            //background-color: $main-color-light;
             //color: #fff;
         }
-        input[type=text] {
+        input[type=text],
+        textarea {
             border: none;
             outline: none;
+            border-bottom: 1px solid transparent;
+            padding: .4rem;
+
+            &:focus {
+                //border-bottom-color: rgba(0,0,0,.2);
+                background-color: $main-color-light;
+            }
+        }
+        textarea {
+            max-width: 100%;
+            min-width: 50%;
+            border: 1px solid #eee;
         }
     }
 
@@ -194,10 +213,10 @@ input[type=button] {
         }
 
         .list-item {
-            padding: 1rem;
+            padding: 1rem 2rem;
 
             li {
-                margin-bottom: .5rem;
+                //margin-bottom: .5rem;
             }
         }
 

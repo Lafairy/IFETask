@@ -19,7 +19,7 @@ Vue.use(Router)
 let router = new Router()
 
 router.map({
-    '/': {
+    '/home': {
         name: 'home',
         component: Home
     },
@@ -34,7 +34,7 @@ router.map({
 })
 
 router.redirect({
-    '*': '/'
+    '*': '/home'
 })
 
 router.start(App, 'body')
