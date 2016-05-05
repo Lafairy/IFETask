@@ -33,8 +33,8 @@ router.map({
     }
 })
 
-/* router.redirect({
+router.redirect({
     '*': '/'
-})*/
+})
 
 router.start(App, 'body')

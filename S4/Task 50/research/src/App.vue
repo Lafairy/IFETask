@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Menu></Menu>
-        <router-view></router-view>
+        <div class="wrap">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -14,7 +16,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

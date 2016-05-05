@@ -1,7 +1,7 @@
 <template>
 
     <div class="no-item" v-if="!items.length">
-        <div class="add-new">新建问卷</div>
+        <input type="button" value="+ 新建问卷" class="add-new large" v-link="{name: 'edit', params: {id: 'new'}}">
     </div>
     <div id="research-list" v-if="items.length">
 
