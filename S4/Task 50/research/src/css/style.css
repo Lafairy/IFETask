@@ -522,5 +522,17 @@ input[type=button] {
     font-weight: 500; }
   #edit-item .list .control {
     text-align: right; }
+    #edit-item .list .control a,
+    #edit-item .list .control label {
+      text-decoration: none;
+      color: #ccc; }
+      #edit-item .list .control a input,
+      #edit-item .list .control label input {
+        margin-right: .5rem; }
+      #edit-item .list .control a:hover,
+      #edit-item .list .control label:hover {
+        color: #23A22E; }
+    #edit-item .list .control label {
+      margin-right: .5rem; }
 
 /*# sourceMappingURL=style.css.map */

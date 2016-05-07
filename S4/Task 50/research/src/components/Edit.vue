@@ -40,7 +40,7 @@
                         
                         <div class="control">
                             <label><input type="checkbox">必填</label>
-                            <a href="javascript:;" @click="add($index)"  v-if="item.type !== 'textarea'">添加选项</a>
+                            <a href="javascript:;" v-if="item.type !== 'textarea'" @click="add($index)">添加选项</a>
                             <a href="javascript:;" @click="up($index)">上移</a>
                             <a href="javascript:;" @click="down($index)">下移</a>
                             <a href="javascript:;" @click="copy($index)">复用</a>
@@ -115,7 +115,7 @@
                 this.itemList.splice(index, 1)
             },
             up: function (index) {
-                console.log(index)
+                console.log(this.itemList)
                 if (index === 0) return
 
                 let temp = this.itemList[index - 1]
@@ -130,6 +130,12 @@
 
                 this.itemList.$set(index + 1, this.itemList[index])
                 this.itemList.$set(index, temp)
+            },
+            add: function (index) {
+                console.log(this.itemList[index])
+                this.itemList[index].items.push('')
+                // this.itemList[index].items.push('aaa')
+                // console.log(this.itemList)
             }
         }
     }

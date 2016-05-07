@@ -228,6 +228,22 @@ input[type=button] {
 
         .control {
             text-align: right;
+
+            a,
+            label {
+                text-decoration: none;
+                color: #ccc;
+
+                input {
+                    margin-right: .5rem;
+                }
+                &:hover {
+                    color: $main-color;
+                }
+            }
+            label {
+                margin-right: .5rem;
+            }
         }
     }
 }
