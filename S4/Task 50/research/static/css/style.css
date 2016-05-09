@@ -470,9 +470,9 @@ input[type=button] {
   vertical-align: middle; }
 #edit-item .edit {
   transition: .2s all ease-in-out;
-  border-left: 0px solid #eee; }
+  border-left: 5px solid transparent; }
   #edit-item .edit:hover {
-    border-left-width: 5px; }
+    border-left-color: #eee; }
   #edit-item .edit input[type=text],
   #edit-item .edit textarea {
     border: none;
@@ -514,6 +514,19 @@ input[type=button] {
     padding: 0; }
     #edit-item .list ul li {
       list-style: none; }
+  #edit-item .list .remove {
+    background-color: #ccc;
+    color: #fff;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    text-align: center;
+    line-height: 1rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    cursor: pointer; }
+    #edit-item .list .remove:hover {
+      background-color: #E42E37; }
   #edit-item .list .list-item {
     padding: 1rem 2rem; }
   #edit-item .list h3 {

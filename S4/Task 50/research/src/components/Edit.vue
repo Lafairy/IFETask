@@ -10,37 +10,10 @@
             <div class="list" v-if="itemList.length">
                 <ul>
                     <li v-for="item in itemList" class="edit list-item">
-                        <h3>
-                            {{ 'Q' + ($index + 1) }}
-                            <input type="text" value="{{ item.title }}" placeholder="请填入问题"  v-model="itemList[$index].title">
-                        </h3>
 
-                        <!--单选-->
-                        <ul v-if="item.type === 'radio'">
-                            <li v-for="value in item.items">
-                                <label>
-                                    <input type="radio">
-                                    <input type="text" value="{{ value }}" placeholder="请填入选项">
-                                </label>
-                            </li>
-                        </ul>
-
-                        <!--多选-->
-                        <ul v-if="item.type === 'checkbox'">
-                            <li v-for="value in item.items">
-                                <label>
-                                    <input type="checkbox">
-                                    <input type="text" value="{{ value }}" placeholder="请填入选项">
-                                </label>
-                            </li>
-                        </ul>
-
-                        <!--文本-->
-                        <textarea v-if="item.type === 'textarea'"></textarea>
-                        
+                        <Item :index="$index" :item="item"></Item>
                         <div class="control">
                             <label><input type="checkbox">必填</label>
-                            <a href="javascript:;" v-if="item.type !== 'textarea'" @click="add($index)">添加选项</a>
                             <a href="javascript:;" @click="up($index)">上移</a>
                             <a href="javascript:;" @click="down($index)">下移</a>
                             <a href="javascript:;" @click="copy($index)">复用</a>
@@ -75,7 +48,11 @@
 </template>
 
 <script>
+    import Item from './Item'
     export default {
+        components: {
+            Item
+        },
         data () {
             return {
                 title: '',
@@ -132,8 +109,9 @@
                 this.itemList.$set(index, temp)
             },
             add: function (index) {
-                console.log(this.itemList[index])
-                this.itemList[index].items.push('')
+                // console.log(index)
+                // this.itemList.$set(index, )
+                // this.itemList[index].items.push('')
                 // this.itemList[index].items.push('aaa')
                 // console.log(this.itemList)
             }

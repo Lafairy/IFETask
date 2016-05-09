@@ -11,8 +11,8 @@
 import Menu from './components/Menu'
 
 export default {
-  components: {
-    Menu
-  }
+    components: {
+        Menu
+    }
 }
 </script>
