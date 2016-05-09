@@ -477,14 +477,16 @@ input[type=button] {
   #edit-item .edit textarea {
     border: none;
     outline: none;
-    border-bottom: 1px solid transparent;
-    padding: .4rem; }
+    border-bottom: 1px dashed #eee;
+    padding: .4rem;
+    min-width: 60%; }
     #edit-item .edit input[type=text]:focus,
     #edit-item .edit textarea:focus {
       background-color: #e4f9e6; }
   #edit-item .edit textarea {
     max-width: 100%;
     min-width: 50%;
+    min-height: 5rem;
     border: 1px solid #eee; }
 #edit-item .content {
   padding: 2rem;
@@ -513,7 +515,8 @@ input[type=button] {
   #edit-item .list ul {
     padding: 0; }
     #edit-item .list ul li {
-      list-style: none; }
+      list-style: none;
+      margin-bottom: .5rem; }
   #edit-item .list .remove {
     background-color: #ccc;
     color: #fff;
@@ -523,8 +526,9 @@ input[type=button] {
     text-align: center;
     line-height: 1rem;
     border-radius: 50%;
-    margin-right: 1rem;
-    cursor: pointer; }
+    margin-left: .5rem;
+    cursor: pointer;
+    vertical-align: bottom; }
     #edit-item .list .remove:hover {
       background-color: #E42E37; }
   #edit-item .list .list-item {
@@ -547,5 +551,11 @@ input[type=button] {
         color: #23A22E; }
     #edit-item .list .control label {
       margin-right: .5rem; }
+#edit-item .control {
+  text-align: center; }
+#edit-item .date {
+  margin-bottom: 2rem; }
+  #edit-item .date input {
+    border: 1px solid #ccc; }
 
 /*# sourceMappingURL=style.css.map */

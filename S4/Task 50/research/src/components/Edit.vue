@@ -26,9 +26,9 @@
 
             <div class="add-list">
                 <div :class="{ 'show': isAdding, 'item-option': true }">
-                    <input type="button" value="单选" class="transparent" @click="addRadio">
-                    <input type="button" value="多选" class="transparent" @click="addCheckbox">
-                    <input type="button" value="文本题" class="transparent" @click="addTextarea">
+                    <input type="button" value="单选" class="transparent" @click="addItem('radio')">
+                    <input type="button" value="多选" class="transparent" @click="addItem('checkbox')">
+                    <input type="button" value="文本题" class="transparent" @click="addItem('textarea')">
                 </div>
                 <p @click="addTriger">+ 添加问题</p>
             </div>
@@ -40,7 +40,7 @@
                 问卷截止日期： <input type="date">
             </div>
             <div class="btns">
-                <input type="button" value="保存问卷">
+                <input type="button" value="保存问卷" @click="save">
                 <input type="button" value="发布问卷">
             </div>
         </div>
@@ -57,35 +57,22 @@
             return {
                 title: '',
                 itemList: [],
-                isAdding: false
+                isAdding: false,
+                uid: ''
             }
+        },
+        ready () {
+            this.uid = this._uid(10)
         },
         methods: {
             addTriger: function () {
                 this.isAdding = !this.isAdding
             },
-            addCheckbox: function () {
+            addItem: function (type) {
                 this.itemList.push({
-                    type: 'checkbox',
+                    type: type,
                     title: '',
-                    items: [
-                        '', '', ''
-                    ]
-                })
-            },
-            addRadio: function () {
-                this.itemList.push({
-                    type: 'radio',
-                    title: '',
-                    items: [
-                        '', '', ''
-                    ]
-                })
-            },
-            addTextarea: function () {
-                this.itemList.push({
-                    type: 'textarea',
-                    title: ''
+                    items: type !== 'textarea' ? ['', '', ''] : null
                 })
             },
             del: function (index) {
@@ -108,12 +95,24 @@
                 this.itemList.$set(index + 1, this.itemList[index])
                 this.itemList.$set(index, temp)
             },
-            add: function (index) {
-                // console.log(index)
-                // this.itemList.$set(index, )
-                // this.itemList[index].items.push('')
-                // this.itemList[index].items.push('aaa')
-                // console.log(this.itemList)
+            _uid: function (length) {
+                let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+                return ' '.repeat(length).split(' ').reduce(function (x, y) {
+                    return x + possible.charAt(Math.floor(Math.random() * possible.length))
+                })
+            },
+            save: function () {
+                const data = {
+                    uid: this.uid,
+                    title: this.title,
+                    itemList: this.itemList
+                }
+
+                let previousData = JSON.parse(window.localStorage.getItem('research')) || []
+
+                previousData.push(data)
+
+                window.localStorage.setItem('research', JSON.stringify(previousData))
             }
         }
     }

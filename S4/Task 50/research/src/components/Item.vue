@@ -4,25 +4,15 @@
         <input type="text" value="{{ item.title }}" placeholder="请填入问题">
     </h3>
 
-    <!--单选-->
-    <ul v-if="item.type === 'radio'">
+    <!--单/多选-->
+    <ul v-if="item.type === 'radio' || item.type === 'checkbox'">
         <li v-for="value in item.items">
-            <span class="remove" title="删除" @click="remove(value)">x</span>
             <label>
-                <input type="radio">
+                <input type="radio" v-if="item.type === 'radio'">
+                <input type="checkbox" v-if="item.type === 'checkbox'">
                 <input type="text" value="{{ value }}" placeholder="请填入选项">
             </label>
-        </li>
-    </ul>
-
-    <!--多选-->
-    <ul v-if="item.type === 'checkbox'">
-        <li v-for="value in item.items">
             <span class="remove" title="删除" @click="remove(value)">x</span>
-            <label>
-                <input type="checkbox">
-                <input type="text" value="{{ value }}" placeholder="请填入选项">
-            </label>
         </li>
     </ul>
 
