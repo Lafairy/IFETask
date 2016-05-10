@@ -1,7 +1,7 @@
 <template>
     <h3>
         {{ 'Q' + (index + 1) }}
-        <input type="text" value="{{ item.title }}" placeholder="请填入问题">
+        <input type="text" value="{{ item.title }}" v-model="item.title" placeholder="请填入问题">
     </h3>
 
     <!--单/多选-->
@@ -10,9 +10,9 @@
             <label>
                 <input type="radio" v-if="item.type === 'radio'">
                 <input type="checkbox" v-if="item.type === 'checkbox'">
-                <input type="text" value="{{ value }}" placeholder="请填入选项">
+                <input type="text" value="{{ value }}" v-model="value" placeholder="请填入选项">
             </label>
-            <span class="remove" title="删除" @click="remove(value)">x</span>
+            <span class="remove" title="删除" @click="remove($index)">x</span>
         </li>
     </ul>
 
@@ -34,8 +34,6 @@
                 this.item.items.push('')
             },
             remove: function (index) {
-                this.item.items.$remove()
-                console.log(this.item.items)
                 this.item.items.splice(index, 1)
             }
         }

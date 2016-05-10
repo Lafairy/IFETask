@@ -41,7 +41,7 @@
             </div>
             <div class="btns">
                 <input type="button" value="保存问卷" @click="save">
-                <input type="button" value="发布问卷">
+                <input type="button" value="发布问卷" @click="publish">
             </div>
         </div>
     </div>
@@ -49,6 +49,8 @@
 
 <script>
     import Item from './Item'
+    import Pop from '../lib/popuper'
+
     export default {
         components: {
             Item
@@ -58,7 +60,8 @@
                 title: '',
                 itemList: [],
                 isAdding: false,
-                uid: ''
+                uid: '',
+                published: false
             }
         },
         ready () {
@@ -105,14 +108,53 @@
                 const data = {
                     uid: this.uid,
                     title: this.title,
-                    itemList: this.itemList
+                    itemList: this.itemList,
+                    published: this.published
                 }
 
                 let previousData = JSON.parse(window.localStorage.getItem('research')) || []
+                let prevIndex = -1
 
-                previousData.push(data)
+                for (let i = previousData.length - 1; i >= 0; i--) {
+                    if (previousData[i].uid === this.uid) {
+                        prevIndex = i
+                        previousData[prevIndex] = data
+                        break
+                    }
+                }
+                if (!(prevIndex + 1)) {
+                    previousData.push(data)
+                }
 
                 window.localStorage.setItem('research', JSON.stringify(previousData))
+
+                if (!this.published) {
+                    let pop = Pop({
+                        wrap: '.popuper',
+                        type: 'success',
+                        confirm: function () {},
+                        cancel: function () {}
+                    })
+                    pop.edit({
+                        title: '保存成功！',
+                        content: '问卷保存成功(*￣︶￣)y'
+                    }).show()
+                }
+            },
+            publish: function () {
+                this.published = true
+                this.save()
+
+                let pop = Pop({
+                    wrap: '.popuper',
+                    type: 'success',
+                    confirm: function () {},
+                    cancel: function () {}
+                })
+                pop.edit({
+                    title: '发布成功！',
+                    content: '问卷发布成功(*￣︶￣)y'
+                }).show()
             }
         }
     }

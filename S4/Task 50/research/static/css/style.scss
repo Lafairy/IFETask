@@ -5,6 +5,8 @@ $main-color-light: lighten($main-color, 55%);
 $font-color: #34495e;
 $red: #E42E37;
 
+@import "popuper";
+
 * {
     box-sizing: border-box;
 }
