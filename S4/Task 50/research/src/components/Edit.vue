@@ -40,8 +40,8 @@
                 问卷截止日期： <input type="date">
             </div>
             <div class="btns">
-                <input type="button" value="保存问卷" @click="save">
-                <input type="button" value="发布问卷" @click="publish">
+                <input type="button" value="保存问卷" @click="save" v-if="!this.published">
+                <input type="button" value="发布问卷" @click="publish" v-if="!this.published">
             </div>
         </div>
     </div>
@@ -65,7 +65,24 @@
             }
         },
         ready () {
-            this.uid = this._uid(10)
+            if (this.$route && this.$route.params && this.$route.params.id) {
+                let prevIndex = -1
+                let previousData = JSON.parse(window.localStorage.getItem('research'))
+
+                for (let i = previousData.length - 1; i >= 0; i--) {
+                    if (previousData[i].uid === this.$route.params.id) {
+                        prevIndex = i
+                        this.title = previousData[prevIndex].title
+                        this.itemList = previousData[prevIndex].itemList
+                        this.uid = previousData[prevIndex].uid
+                        this.published = previousData[prevIndex].published
+
+                        break
+                    }
+                }
+            } else {
+                this.uid = this._uid(10)
+            }
         },
         methods: {
             addTriger: function () {

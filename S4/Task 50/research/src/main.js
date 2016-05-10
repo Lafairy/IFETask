@@ -5,6 +5,7 @@ import App from './App'
 import Home from './components/Home'
 import Edit from './components/Edit'
 import Data from './components/Data'
+import Check from './components/Check'
 
 /* eslint-disable no-new */
 /*
@@ -26,6 +27,10 @@ router.map({
     '/edit/:id': {
         name: 'edit',
         component: Edit
+    },
+    '/check/:id': {
+        name: 'check',
+        component: Check
     },
     '/data/:id': {
         name: 'data',

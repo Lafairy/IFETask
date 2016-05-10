@@ -540,6 +540,18 @@ input[type=button] {
   text-align: center;
   padding: 2rem; }
 
+#research-list {
+  text-align: center; }
+  #research-list table {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee; }
+  #research-list td,
+  #research-list th {
+    padding: .5rem;
+    text-align: center; }
+
 #edit-item h1 {
   margin: 0; }
   #edit-item h1 input {
@@ -609,7 +621,8 @@ input[type=button] {
     border-radius: 50%;
     margin-left: .5rem;
     cursor: pointer;
-    vertical-align: bottom; }
+    vertical-align: bottom;
+    display: none; }
     #edit-item .list .remove:hover {
       background-color: #E42E37; }
   #edit-item .list .list-item {
@@ -632,11 +645,24 @@ input[type=button] {
         color: #23A22E; }
     #edit-item .list .control label {
       margin-right: .5rem; }
+      #edit-item .list .control label:hover ~ .remove, #edit-item .list .control label:focus ~ .remove {
+        display: block; }
 #edit-item .control {
   text-align: center; }
-#edit-item .date {
-  margin-bottom: 2rem; }
-  #edit-item .date input {
-    border: 1px solid #ccc; }
+#edit-item .btns {
+  margin-top: 2rem; }
+#edit-item .date input {
+  border: 1px solid #ccc; }
+
+#edit-item.check h1 {
+  text-align: center; }
+#edit-item.check .list-item {
+  padding: 2rem 1rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0; }
+  #edit-item.check .list-item:last-child {
+    border-bottom: none; }
+  #edit-item.check .list-item:hover {
+    background-color: #e4f9e6; }
 
 /*# sourceMappingURL=style.css.map */

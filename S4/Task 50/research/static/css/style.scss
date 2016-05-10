@@ -128,6 +128,22 @@ input[type=button] {
     padding: 2rem;
 }
 
+#research-list {
+    text-align: center;
+
+    table {
+        width: 100%;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+    td,
+    th{
+        padding: .5rem;
+        text-align: center;
+    }
+}
+
 #edit-item {
     h1 {
         margin: 0;
@@ -229,6 +245,7 @@ input[type=button] {
             margin-left: .5rem;
             cursor: pointer;
             vertical-align: bottom;
+            display: none;
 
             &:hover {
                 background-color: $red;
@@ -266,6 +283,11 @@ input[type=button] {
             }
             label {
                 margin-right: .5rem;
+
+                &:hover ~ .remove,
+                &:focus ~ .remove {
+                    display: block;
+                }
             }
         }
     }
@@ -273,11 +295,31 @@ input[type=button] {
     .control {
         text-align: center;
     }
+
+    .btns {
+        margin-top: 2rem;
+    }
     .date {
-        margin-bottom: 2rem;
         input {
             border: 1px solid #ccc;
         }
     }
 }
 
+#edit-item.check {
+    h1 {
+        text-align: center;
+    }
+    .list-item {
+        padding: 2rem 1rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 0;
+
+        &:last-child {
+            border-bottom: none;
+        }
+        &:hover {
+            background-color: $main-color-light;
+        }
+    }
+}
