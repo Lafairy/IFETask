@@ -1,3 +1,5 @@
+/* Global Color */
+/* Reset */
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Change the default font family in all browsers (opinionated).
@@ -364,6 +366,7 @@ textarea {
   font: inherit;
   /* 2 */ }
 
+/* popuper */
 .popuper {
   position: fixed;
   display: none;
@@ -445,6 +448,7 @@ textarea {
   .popuper.show {
     display: block; }
 
+/* Pages */
 * {
   box-sizing: border-box; }
 
@@ -491,6 +495,12 @@ input[type=button] {
   width: 80%;
   margin: 0 auto; }
 
+.wrap {
+  margin: 5% auto;
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); }
+
 #main-menu {
   background-color: #23A22E; }
   #main-menu a {
@@ -530,12 +540,6 @@ input[type=button] {
   #main-menu ul .v-link-active {
     background-color: #28b734; }
 
-.wrap {
-  margin: 5% auto;
-  background-color: #fff;
-  padding: 2rem;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); }
-
 .no-item {
   text-align: center;
   padding: 2rem; }
@@ -544,13 +548,14 @@ input[type=button] {
   text-align: center; }
   #research-list table {
     width: 100%;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee; }
+    margin-bottom: 2rem; }
   #research-list td,
   #research-list th {
     padding: .5rem;
     text-align: center; }
+  #research-list thead,
+  #research-list tr:nth-child(even) {
+    background: #F7F7F7; }
 
 #edit-item h1 {
   margin: 0; }

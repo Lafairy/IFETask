@@ -115,6 +115,9 @@
                 this.itemList.$set(index + 1, this.itemList[index])
                 this.itemList.$set(index, temp)
             },
+            copy: function () {
+              // Todo
+            },
             _uid: function (length) {
                 let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
                 return ' '.repeat(length).split(' ').reduce(function (x, y) {

@@ -1,0 +1,51 @@
+#main-menu {
+    background-color: $main-color;
+    a {
+        color: #fff;
+        font-weight: 400;
+        text-decoration: none;
+        font-size: 1.4rem;
+
+        span {
+            background-color: #fff;
+            display: inline-block;
+            color: $main-color;
+            width: 1.6rem;
+            height: 1.6rem;
+            vertical-align: baseline;
+            text-align: center;
+            line-height: 1.6rem;
+            border-radius: 50%;
+            margin-right: .5rem;
+            transition: .2s transform ease-in-out;
+        }
+    }
+    .logo {
+        display: inline-block;
+        font-size: 0;
+        padding: 0 2rem;
+
+        &:hover span {
+            transform: rotate(-30deg);
+        }
+    }
+    ul,
+    nav {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    ul {
+        li {
+            display: inline-block;
+        }
+        a {
+            display: inline-block;
+            padding: 1rem;
+            font-size: 1rem;
+        }
+        .v-link-active {
+            background-color: lighten($main-color, 5%);
+        }
+    }
+}

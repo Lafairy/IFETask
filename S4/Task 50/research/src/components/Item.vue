@@ -31,7 +31,8 @@
         },
         methods: {
             add: function () {
-                this.item.items.push('')
+                // Todo
+                // this.item.items.push('')
             },
             remove: function (index) {
                 this.item.items.splice(index, 1)
