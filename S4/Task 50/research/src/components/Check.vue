@@ -18,7 +18,10 @@
 
         <div class="control">
             <div class="date">
-                问卷截止日期： <input type="date">
+                问卷截止日期： 2016年5月12日15:13:51
+            </div>
+            <div class="btns">
+                <input type="button" value="提交" @click="submit">
             </div>
         </div>
     </div>
@@ -26,6 +29,7 @@
 
 <script>
     import CheckItem from './CheckItem'
+    import Pop from '../lib/popuper'
 
     export default {
         components: {
@@ -58,6 +62,20 @@
                 }
             } else {
                 this.uid = this._uid(10)
+            }
+        },
+        methods: {
+            submit: function () {
+                let pop = Pop({
+                    wrap: '.popuper',
+                    type: 'success',
+                    confirm: function () {},
+                    cancel: function () {}
+                })
+                pop.edit({
+                    title: '提交成功！',
+                    content: '问卷提交成功(*￣︶￣)y'
+                }).show()
             }
         }
     }

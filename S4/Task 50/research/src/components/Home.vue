@@ -31,7 +31,7 @@
             </tbody>
         </table>
 
-        <input type="button" value="+ 新建问卷" class="add-new" v-link="{name: 'edit', params: {id: 'new'}}">
+        <input type="button" value="+ 新建问卷" class="add-new new" v-link="{name: 'edit', params: {id: 'new'}}">
 
     </div>
 </template>

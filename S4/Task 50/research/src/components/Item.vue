@@ -1,7 +1,7 @@
-<template>
+<template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <h3>
         {{ 'Q' + (index + 1) }}
-        <input type="text" value="{{ item.title }}" v-model="item.title" placeholder="请填入问题">
+        <input type="text" v-model="item.title" placeholder="请填入问题" v-on:focus="console.log(this)">
     </h3>
 
     <!--单/多选-->
@@ -9,8 +9,8 @@
         <li v-for="value in item.items">
             <label>
                 <input type="radio" v-if="item.type === 'radio'">
-                <input type="checkbox" v-if="item.type === 'checkbox'">
-                <input type="text" value="{{ value }}" v-model="value" placeholder="请填入选项">
+                <input type="checkbox" v-if="item.type === 'checkbox' ">
+                <input type="text" v-model="value" placeholder="请填入选项">
             </label>
             <span class="remove" title="删除" @click="remove($index)">x</span>
         </li>
@@ -27,12 +27,15 @@
     export default {
         props: ['item', 'index'],
         data () {
-            return {}
+            return {
+                newItemIndex: 1
+            }
         },
         methods: {
             add: function () {
                 // Todo
-                // this.item.items.push('')
+                console.log(this.item.items)
+                this.item.items.push('新选项' + this.newItemIndex++)
             },
             remove: function (index) {
                 this.item.items.splice(index, 1)

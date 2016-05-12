@@ -8,11 +8,10 @@
     <ul v-if="item.type === 'radio' || item.type === 'checkbox'">
         <li v-for="value in item.items">
             <label>
-                <input type="radio" v-if="item.type === 'radio'">
-                <input type="checkbox" v-if="item.type === 'checkbox'">
+                <input type="radio" v-if="item.type === 'radio'" :value="value" :name="uid + '-q' + index">
+                <input type="checkbox" v-if="item.type === 'checkbox'" :value="value" :name="uid + '-q' + index + '[]'">
                 {{ value }}
             </label>
-            <span class="remove" title="删除" @click="remove($index)">x</span>
         </li>
     </ul>
 
@@ -25,7 +24,9 @@
     export default {
         props: ['item', 'index'],
         data () {
-            return {}
+            return {
+                uid: this.$parent.uid
+            }
         }
     }
 </script>

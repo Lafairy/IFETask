@@ -482,10 +482,16 @@ input[type=button] {
     background-color: transparent;
     border: 1px solid #eee;
     color: #34495e; }
+  input[type=button].new {
+    background: transparent;
+    border: 2px dashed #eee;
+    color: #999; }
+    input[type=button].new:hover {
+      border-color: #ccc; }
   input[type=button].large {
     font-size: 1.6rem;
     padding: .8rem 1.6rem; }
-  input[type=button]:hover {
+  input[type=button]:not(.new):hover {
     box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.4); }
   input[type=button]:active {
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.4); }
@@ -581,11 +587,13 @@ input[type=button] {
     #edit-item .edit input[type=text]:focus,
     #edit-item .edit textarea:focus {
       background-color: #e4f9e6; }
-  #edit-item .edit textarea {
-    max-width: 100%;
-    min-width: 50%;
-    min-height: 5rem;
-    border: 1px solid #eee; }
+#edit-item textarea {
+  max-width: 100%;
+  min-width: 50%;
+  padding: .6rem 1rem;
+  min-height: 5rem;
+  border: 1px solid #eee;
+  outline: none; }
 #edit-item .content {
   padding: 2rem;
   margin: 2rem 0;
@@ -626,8 +634,7 @@ input[type=button] {
     border-radius: 50%;
     margin-left: .5rem;
     cursor: pointer;
-    vertical-align: bottom;
-    display: none; }
+    vertical-align: bottom; }
     #edit-item .list .remove:hover {
       background-color: #E42E37; }
   #edit-item .list .list-item {
@@ -662,7 +669,7 @@ input[type=button] {
 #edit-item.check h1 {
   text-align: center; }
 #edit-item.check .list-item {
-  padding: 2rem 1rem;
+  padding: 1.5rem 2rem;
   border-bottom: 1px solid #eee;
   margin-bottom: 0; }
   #edit-item.check .list-item:last-child {

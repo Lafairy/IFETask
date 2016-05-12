@@ -36,13 +36,22 @@ input[type=button] {
         border: 1px solid #eee;
         color: $font-color;
     }
+    &.new {
+        background: transparent;
+        border: 2px dashed #eee;
+        color: #999;
+
+        &:hover {
+            border-color: #ccc;
+        }
+    }
 
     &.large {
         font-size: 1.6rem;
         padding: .8rem 1.6rem;
     }
 
-    &:hover {
+    &:not(.new):hover {
         box-shadow: 0 5px 10px -5px rgba(0,0,0,.4);
     }
     &:active {

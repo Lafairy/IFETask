@@ -13,7 +13,7 @@
 
                         <Item :index="$index" :item="item"></Item>
                         <div class="control">
-                            <label><input type="checkbox">必填</label>
+                            <label><input type="checkbox" :checked="item.required">必填</label>
                             <a href="javascript:;" @click="up($index)">上移</a>
                             <a href="javascript:;" @click="down($index)">下移</a>
                             <a href="javascript:;" @click="copy($index)">复用</a>
@@ -50,6 +50,7 @@
 <script>
     import Item from './Item'
     import Pop from '../lib/popuper'
+    import Utils from '../lib/utils'
 
     export default {
         components: {
@@ -57,7 +58,7 @@
         },
         data () {
             return {
-                title: '',
+                title: '这里是标题',
                 itemList: [],
                 isAdding: false,
                 uid: '',
@@ -65,7 +66,7 @@
             }
         },
         ready () {
-            if (this.$route && this.$route.params && this.$route.params.id) {
+            if (this.$route && this.$route.params && this.$route.params.id && this.$route.params.id !== 'new') {
                 let prevIndex = -1
                 let previousData = JSON.parse(window.localStorage.getItem('research'))
 
@@ -81,6 +82,9 @@
                     }
                 }
             } else {
+                this.title = ''
+                this.itemList = {}
+                this.published = false
                 this.uid = this._uid(10)
             }
         },
@@ -91,8 +95,9 @@
             addItem: function (type) {
                 this.itemList.push({
                     type: type,
-                    title: '',
-                    items: type !== 'textarea' ? ['', '', ''] : null
+                    title: type === 'textarea' ? '这里是文本标题' : '这里是选项标题',
+                    items: type !== 'textarea' ? ['第1个选项', '第2个选项', '第3个选项'] : null,
+                    required: false
                 })
             },
             del: function (index) {
@@ -115,8 +120,10 @@
                 this.itemList.$set(index + 1, this.itemList[index])
                 this.itemList.$set(index, temp)
             },
-            copy: function () {
-              // Todo
+            copy: function (index) {
+                const copyObj = this.itemList[index]
+
+                this.itemList.splice(index, 0, Utils.clone(copyObj, true))
             },
             _uid: function (length) {
                 let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
