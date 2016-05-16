@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+}
+body,
+html {
+    background-color: #eee;
+    font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+    color: $font-color;
+}
+input {
+    font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+    color: $font-color;
+    background-color: transparent;
+}
+
+input[type=button] {
+    background-color: $main-color;
+    color: #fff;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    border-radius: .5rem;
+    transition: .2s all ease-in-out;
+    outline: none;
+
+    &.large {
+        font-size: 1.6rem;
+        padding: .8rem 1.4rem;
+    }
+    &.gray {
+        background-color: #eee;
+        color: #333;
+    }
+    &.transparent {
+        background-color: transparent;
+        border: 1px solid #eee;
+        color: $font-color;
+    }
+    &.new {
+        background: transparent;
+        border: 2px dashed #eee;
+        color: #999;
+
+        &:hover {
+            border-color: #ccc;
+        }
+    }
+
+    &.large {
+        font-size: 1.6rem;
+        padding: .8rem 1.6rem;
+    }
+
+    &:not(.new):hover {
+        box-shadow: 0 5px 10px -5px rgba(0,0,0,.4);
+    }
+    &:active {
+        box-shadow: 0 0 0 rgba(0,0,0,.4);
+    }
+}
+
+.cover,
+.wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.wrap {
+    margin: 5% auto;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}

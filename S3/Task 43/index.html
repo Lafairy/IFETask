@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 43</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="js/main.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            text-align: center;
+            background: #ddd;
+        }
+
+        body > div {
+            margin: 0 auto;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 20px -10px rgba(0,0,0,.4);
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="pic-1">
+    <img src="./img/1.jpg" alt="Rella">
+</div>
+
+<div id="pic-2">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+</div>
+
+<div id="pic-3">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+</div>
+
+<div id="pic-4">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
+</div>
+
+<div id="pic-5">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
+    <img src="./img/5.jpg" alt="Rella">
+</div>
+
+<input type="button" id="p5-pop" value="弹出第一张图片" style="margin-bottom: 60px
+">
+
+<div id="pic-6">
+    <img src="./img/1.jpg" alt="Rella">
+    <img src="./img/2.jpg" alt="Rella">
+    <img src="./img/3.jpg" alt="Rella">
+    <img src="./img/4.jpg" alt="Rella">
+    <img src="./img/5.jpg" alt="Rella">
+    <img src="./img/6.jpg" alt="Rella">
+</div>
+
+<input type="button" id="p6-grid" value="网格全屏" style="margin-bottom: 60px
+">
+
+<div id="copyright" style="
+    color: rgb(195, 147, 147);
+    margin-top: 80px;
+    display: block;
+">
+    图片来自Rella大大，
+    <a href="http://www.pixiv.net/member.php?id=163536" style="
+        color: rgb(195, 147, 147);
+    ">
+        P站地址
+    </a>
+</div>
+
+<script>
+    var p1 = yoPhoto({
+        wrap: '#pic-1'
+    });
+    var p2 = yoPhoto({
+        wrap: '#pic-2',
+        height: '400px'
+    });
+
+    var p3 = yoPhoto({
+        wrap: '#pic-3',
+        height: '400px'
+    });
+
+    var p4 = yoPhoto({
+        wrap: '#pic-4',
+        height: '400px'
+    });
+
+    var p5 = yoPhoto({
+        wrap: '#pic-5',
+        height: '600px'
+    });
+
+    document.querySelector('#p5-pop').addEventListener('click', function() {
+        p5.pop(0);
+    });
+
+    document.querySelector('#p6-grid').addEventListener('click', function() {
+        p6.grid(true);
+    });
+
+    var p6 = yoPhoto({
+        wrap: '#pic-6',
+        height: '600px'
+    });
+</script>
+
+</body>
+</html>

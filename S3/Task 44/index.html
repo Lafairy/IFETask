@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 44</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="js/main.js"></script>
+
+    <style>
+        body,
+        html{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        #wrap {
+            width: 100%;
+            margin: 0 auto;
+            margin-top: 20px;
+            min-height: 100%;
+        }
+
+        #add {
+            border: none;
+            background-color: #2ecc71;
+            border-radius: 3px;
+            outline: none;
+            padding: .4rem 1rem;
+            margin-left: .6rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
+            -webkit-appearance: none;
+        }
+        #add:hover {
+            background-color: #58d68d;
+        }
+        #add:active {
+            background-color: #27ad60;
+            color: #ccc;
+        }
+
+        @keyframes loading {
+            0% {
+                border-radius: 0;
+                background-color: #ccc;
+                transform: rotate(0deg); }
+            50% {
+                border-radius: 50%;
+                background-color: #4eba56;
+                transform: rotate(180deg); }
+            100% {
+                border-radius: 1%;
+                background-color: #ccc;
+                transform: rotate(359deg); }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="wow1">
+        <div id="wrap">
+        </div>
+
+        <div style="text-align: center;margin: 20% 0 5% 0">
+            <input type="button" id="add" value="添加图片">
+        </div>
+    </div>
+
+
+<script>
+
+    var index = 0;
+
+    var wow = wowPhoto({
+        wrap: '#wrap',
+        col: 6
+    }).load('http://geeku.work/ife/api/img.php', function(data) {
+
+        for (var key in data) {
+            data[key].src = 'http://geeku.work/ife/api/imgs/' + data[key].src;
+        }
+
+        return data;
+    });
+
+    document.querySelector('#add').addEventListener('click', function() {
+        getImgs(++index);
+    });
+
+    function getImgs(index) {
+
+        wow.load('http://geeku.work/ife/api/img.php?page=' + index, function(data) {
+
+            for (var key in data) {
+                data[key].src = 'http://geeku.work/ife/api/imgs/' + data[key].src;
+            }
+
+            return data;
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+.xiuPhoto {
+
+    font-family: "Microsoft Yahei";
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .img-row {
+        padding: 0;
+        margin: 0;
+    }
+    .img-item {
+
+        position: relative;
+        float: left;
+        height: 100%;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            &:hover {
+                cursor: zoom-in;
+            }
+        }
+
+        header {
+
+            transform: translateY(-100%);
+            background: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.6));
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.6));
+            background: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.6));
+            font-size: .9rem;
+            color: #fff;
+            padding: .8rem 1rem;
+            transition: opacity .2s ease-in-out;
+            opacity: 0;
+
+            h3,
+            p {
+                margin: 0;
+            }
+
+            &.no-title-content {
+                display: none;
+            }
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            background-color: #1D9027;
+            left: calc(50% - .5rem);
+            top: calc(50% - .5rem);
+            animation: loading 1s cubic-bezier(0.59, 0.02, 0.3, 1) infinite;
+            z-index: -1;
+        }
+
+        &:hover {
+
+            header {
+                opacity: 1;
+            }
+            img {
+                opacity: .8;
+            }
+        }
+    }
+}
+
+@keyframes loading {
+    0% {
+        border-radius: 0;
+        background-color: #ccc;
+        transform: rotate(0deg);
+    }
+    50% {
+        border-radius: 50%;
+        background-color: #4eba56;
+        transform: rotate(180deg);
+    }
+    100% {
+        border-radius: 1%;
+        background-color: #ccc;
+        transform: rotate(359deg);
+    }
+}
+
+#xiuPhoto-pop {
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    transform: scale(0);
+    z-index: 999;
+    transition: transform .2s ease-in-out;
+
+    &.show {
+        transform: scale(1);
+    }
+
+    img {
+        display: block;
+        position: absolute;
+        width: auto;
+        height: auto;
+        max-height: 90%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

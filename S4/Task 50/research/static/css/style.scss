@@ -1,0 +1,22 @@
+/* Global Color */
+$main-color: #23A22E;
+$main-color-light: lighten($main-color, 55%);
+$font-color: #34495e;
+$red: #E42E37;
+
+/* Reset */
+@import "normalize";
+
+/* popuper */
+@import "popuper";
+
+/* Pages */
+
+// Global style
+@import "global";
+// Menu page
+@import "menu";
+// Home page
+@import "home";
+// Edit and check page
+@import "editcheck";

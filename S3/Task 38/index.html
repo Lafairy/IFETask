@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 38</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="js/main.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        #wrap {
+            width: 90%;
+            max-width: 800px;
+            margin: 4rem auto;
+            font-family: "Microsoft YaHei"
+        }
+
+        .et th {
+            position: relative;
+        }
+        .et th:after {
+            content: '';
+            position: absolute;
+            right: 1rem;
+            color: #E2E2E2;
+            font-size: .8rem;
+            line-height: 1.4rem;
+        }
+        .et th.asc:after {
+            content: '▲';
+        }
+        .et th.desc:after {
+            content: '▼';
+        }
+        .et th:hover:after {
+            color: #979797;
+        }
+        .et th:hover {
+            background: #eee;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 100%;
+            height: 200px;
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: 5px;
+            border-color: #ccc;
+            outline: none;
+            font-size: 1.4rem;
+            font-family: "Microsoft YaHei";
+        }
+        textarea:focus {
+            border-color: #1CB92A;
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrap">
+    <table class="et"></table>
+    <br>
+    <p>填写内容更新表格内容，格式[["A",1,2,3,4],["B",2,3,4,5]]:</p>
+    <textarea id="data"></textarea>
+</div>
+
+<script>
+
+    var data = {
+        header : ['表头1','表头2','表头3','表头4','表头5'],
+        sortable : [0,1,1,0,1],
+        content: [
+            ['A',3,5,6,7],
+            ['B',2,6,8,77],
+            ['C',35,6,6,88]
+        ]
+    };
+
+    var et = easyTable({
+        table: document.querySelector('table'),
+        data: data
+    }).order({
+        index: 1,
+        order: 'desc'
+    });
+
+    var textarea = document.getElementById('data');
+    textarea.innerText = JSON.stringify(data.content);
+    textarea.addEventListener('keyup', function(e) {
+
+        try {
+
+            var value = textarea.value.replace(/'/g, '"');
+            var newContent = JSON.parse(value);
+
+            data.content = newContent;
+        } catch(e) {
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+
+table.et {
+    width: 100%;
+    background: #fff;
+    margin: 1em 0;
+    border: 1px solid rgba(34,36,38,.15);
+    box-shadow: none;
+    border-radius: .28571429rem;
+    text-align: left;
+    color: rgba(0,0,0,.87);
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: "Microsoft YaHei";
+}
+
+table.et:first-child {
+    margin-top: 0
+}
+
+table.et:last-child {
+    margin-bottom: 0
+}
+
+table.et td,table.et th {
+    -webkit-transition: background .1s ease,color .1s ease;
+    transition: background .1s ease,color .1s ease
+}
+
+table.et thead {
+    box-shadow: none
+}
+
+table.et thead th {
+    cursor: pointer;
+    background: #f9fafb;
+    text-align: inherit;
+    color: rgba(0,0,0,.87);
+    padding: .92857143em .71428571em;
+    vertical-align: inherit;
+    font-style: none;
+    font-weight: 700;
+    text-transform: none;
+    border-bottom: 1px solid rgba(34,36,38,.1);
+    border-left: none
+}
+
+table.et thead tr>th:first-child {
+    border-left: none;
+}
+
+table.et thead tr:first-child>th:first-child {
+    border-radius: .28571429rem 0 0
+}
+
+table.et thead tr:first-child>th:last-child {
+    border-radius: 0 .28571429rem 0 0
+}
+
+table.et thead tr:first-child>th:only-child {
+    border-radius: .28571429rem .28571429rem 0 0
+}
+
+table.et tfoot {
+    box-shadow: none
+}
+
+table.et tfoot th {
+    cursor: auto;
+    border-top: 1px solid rgba(34,36,38,.15);
+    background: #f9fafb;
+    text-align: inherit;
+    color: rgba(0,0,0,.87);
+    padding: .71428571em;
+    vertical-align: middle;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none
+}
+
+table.et tfoot tr>th:first-child {
+    border-left: none
+}
+
+table.et tfoot tr:first-child>th:first-child {
+    border-radius: 0 0 0 .28571429rem
+}
+
+table.et tfoot tr:first-child>th:last-child {
+    border-radius: 0 0 .28571429rem
+}
+
+table.et tfoot tr:first-child>th:only-child {
+    border-radius: 0 0 .28571429rem .28571429rem
+}
+
+table.et tr td {
+    border-top: 1px solid rgba(34,36,38,.1)
+}
+
+table.et tr:first-child td {
+    border-top: none
+}
+
+table.et td {
+    padding: .71428571em;
+    text-align: inherit
+}
+
+table.et>.icon {
+    vertical-align: baseline
+}
+
+table.et>.icon:only-child {
+    margin: 0
+}
+
+table.et.segment {
+    padding: 0
+}
+
+table.et.segment:after {
+    display: none
+}
+
+table.et.segment.stacked:after {
+    display: block
+}
+
+@media only screen and (max-width: 767px) {
+    table.et:not(.unstackable) {
+        width:100%;
+        padding: 0
+    }
+
+    table.et:not(.unstackable) tbody,table.et:not(.unstackable) tr,table.et:not(.unstackable) tr>td,table.et:not(.unstackable) tr>th {
+        width: auto!important;
+        display: block!important
+    }
+
+    table.et:not(.unstackable) tfoot,table.et:not(.unstackable) thead {
+        display: block
+    }
+
+    table.et:not(.unstackable) tr {
+        padding-top: 1em;
+        padding-bottom: 1em;
+        box-shadow: 0 -1px 0 0 rgba(0,0,0,.1) inset!important
+    }
+
+    table.et:not(.unstackable) tr>td,table.et:not(.unstackable) tr>th {
+        background: 0 0;
+        border: none!important;
+        padding: .25em .75em!important;
+        box-shadow: none!important
+    }
+
+    table.et:not(.unstackable) td:first-child,table.et:not(.unstackable) th:first-child {
+        font-weight: 700
+    }
+
+    .et.definition.table:not(.unstackable) thead th:first-child {
+        box-shadow: none!important
+    }
+}
+
+table.et td .image,table.et td .image img,table.et th .image,table.et th .image img {
+    max-width: none
+}
+
+.et.structured.table {
+    border-collapse: collapse
+}
+
+.et.structured.table thead th {
+    border-left: none;
+    border-right: none
+}
+
+.et.structured.sortable.table thead th {
+    border-left: 1px solid rgba(34,36,38,.15);
+    border-right: 1px solid rgba(34,36,38,.15)
+}
+
+.et.structured.basic.table th {
+    border-left: none;
+    border-right: none
+}
+
+.et.structured.celled.table tr td,.et.structured.celled.table tr th {
+    border-left: 1px solid rgba(34,36,38,.1);
+    border-right: 1px solid rgba(34,36,38,.1)
+}
+
+.et.definition.table thead:not(.full-width) th:first-child {
+    pointer-events: none;
+    background: 0 0;
+    font-weight: 400;
+    color: rgba(0,0,0,.4);
+    box-shadow: -1px -1px 0 1px #fff
+}
+
+.et.definition.table tfoot:not(.full-width) th:first-child {
+    pointer-events: none;
+    background: 0 0;
+    font-weight: rgba(0,0,0,.4);
+    color: normal;
+    box-shadow: 1px 1px 0 1px #fff
+}
+
+.et.celled.definition.table thead:not(.full-width) th:first-child {
+    box-shadow: 0 -1px 0 1px #fff
+}
+
+.et.celled.definition.table tfoot:not(.full-width) th:first-child {
+    box-shadow: 0 1px 0 1px #fff
+}
+
+.et.definition.table tr td:first-child {
+    background: rgba(0,0,0,.03);
+    font-weight: 700;
+    color: rgba(0,0,0,.95)
+}
+
+.et.definition.table td:nth-child(2),.et.definition.table tfoot:not(.full-width) th:nth-child(2),.et.definition.table thead:not(.full-width) th:nth-child(2) {
+    border-left: 1px solid rgba(34,36,38,.15)
+}
+
+table.et td.positive,table.et tr.positive {
+    box-shadow: 0 0 0 #a3c293 inset;
+    background: #fcfff5!important;
+    color: #2c662d!important
+}
+
+table.et td.negative,table.et tr.negative {
+    box-shadow: 0 0 0 #e0b4b4 inset;
+    background: #fff6f6!important;
+    color: #9f3a38!important
+}
+
+table.et td.error,table.et tr.error {
+    box-shadow: 0 0 0 #e0b4b4 inset;
+    background: #fff6f6!important;
+    color: #9f3a38!important
+}
+
+table.et td.warning,table.et tr.warning {
+    box-shadow: 0 0 0 #c9ba9b inset;
+    background: #fffaf3!important;
+    color: #573a08!important
+}
+
+table.et td.active,table.et tr.active {
+    box-shadow: 0 0 0 rgba(0,0,0,.87) inset;
+    background: #e0e0e0!important;
+    color: rgba(0,0,0,.87)!important
+}
+
+table.et tr td.disabled,table.et tr.disabled td,table.et tr.disabled:hover,table.et tr:hover td.disabled {
+    pointer-events: none;
+    color: rgba(40,40,40,.3)
+}
+
+
+.et th {
+    position: relative;
+}
+.et th:after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    color: #E2E2E2;
+    font-size: .8rem;
+    line-height: 1.4rem;
+}
+.et th.asc:after {
+    content: '▲';
+}
+.et th.desc:after {
+    content: '▼';
+}
+.et th:hover:after {
+    color: #979797;
+}
+.et th:hover {
+    background: #eee;
+}
+.et.sticky thead {
+    position: fixed;
+    top: 0;
+    transition: transform .1s ease-in;
+}

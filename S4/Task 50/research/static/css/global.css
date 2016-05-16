@@ -1,0 +1,70 @@
+/*
+Error: Undefined variable: "$font-color".
+        on line 8 of global.scss
+
+3: }
+4: body,
+5: html {
+6:     background-color: #eee;
+7:     font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+8:     color: $font-color;
+9: }
+10: input {
+11:     font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif !important;
+12:     color: $font-color;
+13:     background-color: transparent;
+
+Backtrace:
+global.scss:8
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:115:in `with_frame'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:431:in `map'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:115:in `with_frame'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/engine.rb:295:in `render_with_sourcemap'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:209:in `each'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/plugin.rb:82:in `update_stylesheets'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/exec/sass_scss.rb:361:in `watch_or_update'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/exec/base.rb:52:in `parse'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/lib/sass/exec/base.rb:19:in `parse!'
+C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.19/bin/scss:13:in `<top (required)>'
+C:/Ruby22-x64/bin/scss:23:in `load'
+C:/Ruby22-x64/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$font-color\".\A         on line 8 of global.scss\A \A 3: }\A 4: body,\A 5: html {\A 6:     background-color: #eee;\A 7:     font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, \"Microsoft YaHei\", SimSun, Heiti, sans-serif !important;\A 8:     color: $font-color;\A 9: }\A 10: input {\A 11:     font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, \"Microsoft YaHei\", SimSun, Heiti, sans-serif !important;\A 12:     color: $font-color;\A 13:     background-color: transparent;"; }

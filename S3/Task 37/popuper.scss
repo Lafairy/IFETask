@@ -1,0 +1,108 @@
+.popuper {
+
+    position: fixed;
+    display: none;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
+
+    & * {
+        box-sizing: border-box;
+    }
+
+    .pop-wrap {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        background-color: #fff;
+        border-radius: 3px;
+        //transform: translateX(-50%) translateY(-50%);
+        width: 90%;
+        max-width: 500px;
+        overflow: hidden;
+    }
+
+    &.info .pop-header {
+        background-color: #fff;
+        color: #333;
+    }
+    &.error .pop-header {
+        background-color: #e74c3c;
+        color: #fff;
+    }
+    &.success .pop-header {
+        background-color: #2ecc71;
+        color: #fff;
+    }
+    &.warning .pop-header {
+        background-color: #f1c40f;
+        color: #fff;
+    }
+
+    .pop-header {
+        padding: 1rem;
+        cursor: move;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .pop-content {
+        padding: 1rem 1rem;
+        min-height: 100px;
+    }
+
+    .pop-control {
+        width: 100%;
+        text-align: right;
+        padding: 1rem 1rem;
+        font-size: 0;
+    }
+    input[type=button] {
+        border: none;
+        background-color: #2ecc71;
+        border-radius: 3px;
+        outline: none;
+        padding: .4rem 1rem;
+        margin-left: .6rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fff;
+        cursor: pointer;
+        font-family: 'Open Sans', Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", SimSun, Heiti, sans-serif;
+        -webkit-appearance: none;
+
+        &:hover {
+            background-color: #58d68d;
+        }
+        &:active {
+            background-color: #27ad60;
+            color: #ccc;
+        }
+
+        &.cancel {
+            background-color: #e74c3c;
+
+            &:hover {
+                background-color: #ec7063;
+            }
+            &:active {
+                background-color: #c44133;
+            }
+        }
+    }
+
+    &.show {
+        display: block;
+    }
+}
