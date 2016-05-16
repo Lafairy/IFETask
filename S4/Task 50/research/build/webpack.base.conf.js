@@ -5,7 +5,7 @@ var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    app: './src/popuper.js'
+    app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
